@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teste PIX Modal</title>
+    <style>
+        body {
+            background: #000;
+            color: #fff;
+            font-family: Arial;
+            padding: 50px;
+        }
+        
+        .btn {
+            background: #0066cc;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            margin: 10px;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: #001a33;
+            border: 2px solid #0066cc;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            text-align: center;
+        }
+        
+        .modal-content h2 {
+            color: #00d9ff;
+            margin-bottom: 20px;
+        }
+        
+        .pix-info {
+            background: rgba(0,102,204,0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .preco {
+            color: #00ff88;
+            font-size: 32px;
+            font-weight: bold;
+        }
+        
+        .chave-pix {
+            background: rgba(0,26,51,0.5);
+            border: 2px solid #0066cc;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            word-break: break-all;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>Teste do Sistema PIX</h1>
+    
+    <button class="btn" onclick="testeModal1()">Teste 1: Abrir Modal Direto</button>
+    <button class="btn" onclick="testeModal2()">Teste 2: Com Formulário</button>
+    
+    <div id="info" style="margin-top: 30px; padding: 20px; background: #001a33; border-radius: 10px;">
+        <h3>Status:</h3>
+        <p id="status">Aguardando teste...</p>
+    </div>
+    
+    <!-- Modal PIX -->
+    <div class="modal" id="modalPix">
+        <div class="modal-content">
+            <h2>💳 Pagamento via PIX</h2>
+            
+            <div class="pix-info">
+                <p><strong>Produto:</strong> Teste</p>
+                <p><strong>Plano:</strong> 1 Dia</p>
+                <p class="preco">R$ 20,00</p>
+            </div>
+            
+            <div class="chave-pix">
+                <p style="color: #00d9ff; margin-bottom: 10px;">🔑 Chave PIX:</p>
+                <p id="pixKey">23652c43-84f7-45a6-9c59-dc11b8f80ed3</p>
+            </div>
+            
+            <div style="background: rgba(255,200,0,0.1); border: 1px solid #ffc800; padding: 15px; border-radius: 10px;">
+                <p style="color: #ff3333; font-size: 18px; font-weight: bold;">⚠️ ATENÇÃO: DIGITE O VALOR EXATO!</p>
+                <p style="color: #00ff88; font-size: 28px; font-weight: bold; margin: 10px 0;">R$ 20,00</p>
+            </div>
+            
+            <button class="btn" onclick="fecharModal()" style="margin-top: 20px;">Fechar</button>
+        </div>
+    </div>
+    
+    <script>
+        function testeModal1() {
+            document.getElementById('status').textContent = 'Abrindo modal diretamente...';
+            document.getElementById('modalPix').classList.add('active');
+            console.log('Modal aberto - Teste 1');
+        }
+        
+        function testeModal2() {
+            document.getElementById('status').textContent = 'Simulando fluxo completo...';
+            setTimeout(() => {
+                document.getElementById('modalPix').classList.add('active');
+                console.log('Modal aberto - Teste 2');
+            }, 500);
+        }
+        
+        function fecharModal() {
+            document.getElementById('modalPix').classList.remove('active');
+            document.getElementById('status').textContent = 'Modal fechado. Pronto para novo teste.';
+            console.log('Modal fechado');
+        }
+        
+        // Log para debug
+        console.log('Página carregada');
+        console.log('Modal element:', document.getElementById('modalPix'));
+    </script>
+</body>
+</html>

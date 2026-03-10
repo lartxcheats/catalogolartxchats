@@ -1,0 +1,1311 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificado GBOX - lartxcheats</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #000000;
+            font-family: Arial, sans-serif;
+            animation: mudaCor 10s infinite;
+            position: relative;
+            min-height: 100vh;
+            padding-bottom: 300px;
+        }
+        
+        @keyframes mudaCor {
+            0% { background-color: #000000; }
+            25% { background-color: #0a0a1a; }
+            50% { background-color: #001a33; }
+            75% { background-color: #0a0a1a; }
+            100% { background-color: #000000; }
+        }
+        
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            animation: mudaCor 10s infinite;
+        }
+        
+        .rain-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .rain-icon {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            opacity: 0.5;
+            animation: fall linear infinite;
+        }
+        
+        @keyframes fall {
+            0% { transform: translateY(-100px); }
+            100% { transform: translateY(100vh); }
+        }
+        
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 40px;
+            background: rgba(0, 26, 51, 0.3);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #0066cc;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .btn-voltar {
+            background: linear-gradient(45deg, #0066cc, #2600ff);
+            color: white;
+            border: 2px solid #4d94ff;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(0, 102, 204, 0.4);
+        }
+        
+        .btn-voltar:hover {
+            background: linear-gradient(45deg, #0077dd, #00bbff);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 170, 255, 0.7);
+        }
+        
+        .produto-container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            position: relative;
+            z-index: 10;
+            margin-bottom: 100px;
+        }
+        
+        .produto-lado-esquerdo {
+            position: relative;
+        }
+        
+        .info-box {
+            margin-top: 30px;
+            background: linear-gradient(135deg, rgba(10, 10, 26, 0.95) 0%, rgba(0, 26, 51, 0.95) 100%);
+            border: 2px solid #0066cc;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 40px rgba(0, 102, 204, 0.6);
+        }
+        
+        .produto-imagem-grande {
+            background: linear-gradient(135deg, rgba(0, 26, 51, 0.8) 0%, rgba(0, 102, 204, 0.3) 100%);
+            border: 2px solid #0066cc;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 102, 204, 0.6);
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .produto-imagem-grande img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .produto-detalhes {
+            color: white;
+        }
+        
+        .produto-badge {
+            background: linear-gradient(45deg, #ff6b00, #ff0066);
+            color: white;
+            font-size: 12px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .produto-titulo {
+            color: #00d9ff;
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(0, 217, 255, 0.6);
+        }
+        
+        .produto-preco {
+            font-size: 56px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .produto-subtitulo {
+            color: #4d94ff;
+            font-size: 18px;
+            margin-bottom: 40px;
+        }
+        
+        .produto-descricao {
+            background: rgba(0, 26, 51, 0.5);
+            border: 1px solid #0066cc;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .produto-descricao h3 {
+            color: #00d9ff;
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+        
+        .produto-descricao p {
+            color: #ffffff;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+        
+        .produto-features {
+            margin-bottom: 40px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            color: #ffffff;
+            font-size: 16px;
+        }
+        
+        .feature-icon {
+            background: linear-gradient(45deg, #0066cc, #00d9ff);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+        
+        .planos-container {
+            margin-bottom: 30px;
+        }
+        
+        .planos-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .plano-card {
+            background: rgba(0, 26, 51, 0.5);
+            border: 2px solid #0066cc;
+            border-radius: 15px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .plano-card:hover {
+            border-color: #00d9ff;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0, 217, 255, 0.5);
+        }
+        
+        .plano-card.selected {
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.4), rgba(0, 217, 255, 0.2));
+            border-color: #00d9ff;
+            box-shadow: 0 0 25px rgba(0, 217, 255, 0.6);
+        }
+        
+        .plano-duracao {
+            color: #00d9ff;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .plano-preco {
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .btn-comprar-grande {
+            width: 100%;
+            background: linear-gradient(45deg, #0066cc, #2600ff);
+            color: white;
+            border: 2px solid #4d94ff;
+            padding: 20px;
+            font-size: 22px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 8px 25px rgba(0, 102, 204, 0.5);
+        }
+        
+        .btn-comprar-grande:hover {
+            background: linear-gradient(45deg, #0077dd, #00bbff);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0, 170, 255, 0.8);
+        }
+        
+        .btn-comprar-grande:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, #0a0a1a 0%, #001a33 100%);
+            border: 2px solid #0066cc;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 10px 50px rgba(0, 102, 204, 0.8);
+        }
+        
+        .modal-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .modal-header h2 {
+            color: #00d9ff;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .modal-header p {
+            color: #4d94ff;
+            font-size: 16px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            color: #00d9ff;
+            font-size: 14px;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        
+        .form-group input {
+            width: 100%;
+            background: rgba(0, 26, 51, 0.5);
+            border: 2px solid #0066cc;
+            border-radius: 10px;
+            padding: 15px;
+            color: white;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #00d9ff;
+            box-shadow: 0 0 15px rgba(0, 217, 255, 0.4);
+        }
+        
+        .btn-modal {
+            width: 100%;
+            background: linear-gradient(45deg, #0066cc, #2600ff);
+            color: white;
+            border: 2px solid #4d94ff;
+            padding: 15px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 10px;
+        }
+        
+        .btn-modal:hover {
+            background: linear-gradient(45deg, #0077dd, #00bbff);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 170, 255, 0.7);
+        }
+        
+        .btn-cancelar {
+            background: rgba(255, 0, 0, 0.2);
+            border-color: #ff4444;
+        }
+        
+        .btn-cancelar:hover {
+            background: rgba(255, 0, 0, 0.4);
+            border-color: #ff6666;
+        }
+        
+        .modal-pix {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+            overflow-y: auto;
+            padding: 20px 0;
+        }
+        
+        .modal-pix.active {
+            display: flex;
+        }
+        
+        .modal-pix-content {
+            background: linear-gradient(135deg, #0a0a1a 0%, #001a33 100%);
+            border: 2px solid #0066cc;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            margin: auto;
+            box-shadow: 0 10px 50px rgba(0, 102, 204, 0.8);
+            position: relative;
+        }
+        
+        .modal-pix-content::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .modal-pix-content::-webkit-scrollbar-track {
+            background: rgba(0, 26, 51, 0.5);
+            border-radius: 10px;
+        }
+        
+        .modal-pix-content::-webkit-scrollbar-thumb {
+            background: #0066cc;
+            border-radius: 10px;
+        }
+        
+        .modal-pix-content::-webkit-scrollbar-thumb:hover {
+            background: #00d9ff;
+        }
+        
+        .modal-pix-header h2 {
+            color: #00d9ff;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .modal-pix-header p {
+            color: #4d94ff;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .resumo-compra {
+            background: rgba(0, 102, 204, 0.2);
+            border: 1px solid #0066cc;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .resumo-compra p {
+            color: #ffffff;
+            font-size: 16px;
+            margin: 8px 0;
+        }
+        
+        .resumo-compra .preco-total {
+            color: #00ff88;
+            font-size: 32px;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        
+        .qrcode-container {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            display: inline-block;
+        }
+        
+        .qrcode-container canvas {
+            display: block;
+        }
+        
+        .pix-key-container {
+            background: rgba(0, 26, 51, 0.5);
+            border: 2px solid #0066cc;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .pix-key-label {
+            color: #00d9ff;
+            font-size: 14px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .pix-key-value {
+            color: #ffffff;
+            font-size: 16px;
+            word-break: break-all;
+            margin-bottom: 15px;
+            font-family: monospace;
+        }
+        
+        .btn-copiar-pix {
+            width: 100%;
+            background: linear-gradient(45deg, #00ff88, #00cc66);
+            color: #000000;
+            border: 2px solid #00ff88;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .btn-copiar-pix:hover {
+            background: linear-gradient(45deg, #00ffaa, #00dd77);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 255, 136, 0.5);
+        }
+        
+        .btn-fechar-pix {
+            width: 100%;
+            background: rgba(0, 102, 204, 0.3);
+            color: #4d94ff;
+            border: 2px solid #0066cc;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        
+        .btn-fechar-pix:hover {
+            background: rgba(0, 102, 204, 0.5);
+            color: #00d9ff;
+        }
+        
+        .aviso-pagamento {
+            background: rgba(255, 200, 0, 0.1);
+            border: 1px solid #ffc800;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        
+        .aviso-pagamento p {
+            color: #ffc800;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+        
+        .discord-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 80px;
+            height: 80px;
+            background: transparent;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 20px rgba(88, 101, 242, 0.6);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .discord-float:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(88, 101, 242, 0.8);
+        }
+        
+        .discord-float img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+            border-top: 2px solid #0066cc;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .footer a {
+            color: #00d9ff;
+            text-decoration: none;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .footer a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(0, 217, 255, 0.6);
+        }
+        
+        .footer p {
+            color: #4d94ff;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        
+        .info-box {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            background: linear-gradient(135deg, rgba(10, 10, 26, 0.95) 0%, rgba(0, 26, 51, 0.95) 100%);
+            border: 2px solid #0066cc;
+            border-radius: 15px;
+            padding: 20px;
+            max-width: 350px;
+            z-index: 100;
+            box-shadow: 0 10px 40px rgba(0, 102, 204, 0.6);
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .info-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .info-icon {
+            font-size: 32px;
+            min-width: 40px;
+            text-align: center;
+        }
+        
+        .info-content h3 {
+            color: #ffffff;
+            font-size: 16px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .info-content p {
+            color: #4d94ff;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+        
+        @media (max-width: 768px) {
+            .produto-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 0 20px;
+            }
+            
+            .produto-titulo {
+                font-size: 36px;
+            }
+            
+            .produto-preco {
+                font-size: 42px;
+            }
+            
+            .info-box {
+                max-width: 280px;
+                padding: 15px;
+                bottom: 20px;
+                left: 20px;
+            }
+            
+            .info-content h3 {
+                font-size: 14px;
+            }
+            
+            .info-content p {
+                font-size: 12px;
+            }
+            
+            .info-icon {
+                font-size: 24px;
+                min-width: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <div class="rain-container" id="rain"></div>
+    
+    <div class="header">
+        <a href="ffh4x.html" class="btn-voltar">← Voltar aos Produtos</a>
+    </div>
+    
+    <div class="produto-container">
+        <div class="produto-lado-esquerdo">
+            <div class="produto-imagem-grande">
+                <img src="gbox.webp" alt="Certificado GBOX">
+            </div>
+            
+            <div class="info-box">
+                <div class="info-item">
+                    <div class="info-icon">📦</div>
+                    <div class="info-content">
+                        <h3>Entrega imediata</h3>
+                        <p>Receba o seu pacote imediatamente após o pagamento.</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">🛡️</div>
+                    <div class="info-content">
+                        <h3>Segurança total</h3>
+                        <p>Seus dados são criptografados de ponta-à-ponta durante todo o processo.</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">💳</div>
+                    <div class="info-content">
+                        <h3>Formas de pagamento</h3>
+                        <p>Aceitamos os meios de pagamentos mais populares!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="produto-detalhes">
+            <span class="produto-badge">📜 Certificado</span>
+            <h1 class="produto-titulo">CERTIFICADO GBOX</h1>
+            <div class="produto-preco">R$ 80,00</div>
+            <p class="produto-subtitulo">À vista no Pix • Entrega Imediata</p>
+            
+            <div class="produto-descricao">
+                <h3>📜 CERTIFICADO IOS</h3>
+                <p style="white-space: pre-line; background: rgba(0, 26, 51, 0.3); padding: 15px; border-radius: 10px; margin-bottom: 20px;">CERTIFICADO IOS PODE DURAR ATÉ 1 ANO</p>
+                
+                <p style="white-space: pre-line;">
+📱 Baixe tudo pelo celular (sem PC)
+⚙️ Ative o modo desenvolvedor
+🚀 Instale arquivos .ipa facilmente
+❌ Corrige erro de integridade
+📦 Mais de 1000 aplicativos disponíveis
+💎 Ideal para cheats e apps modificados</p>
+            </div>
+            
+            <div class="planos-container">
+                <h3 style="color: #00d9ff; font-size: 22px; margin-bottom: 20px;">💎 Plano Único</h3>
+                <div class="planos-grid">
+                    <div class="plano-card" onclick="selecionarPlano('anual', 80.00)" style="grid-column: 1 / -1;">
+                        <div class="plano-duracao">Certificado Anual</div>
+                        <div class="plano-preco">R$ 80,00</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="produto-features">
+                <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>Válido por até 1 ano</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>Instalação sem PC</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>Mais de 1000 apps disponíveis</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>Suporte 24/7 no Discord</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>Instalação fácil e rápida</span>
+                </div>
+            </div>
+            
+            <button class="btn-comprar-grande" id="btnComprar" onclick="abrirModal()" disabled>
+                🛒 Selecione um Plano
+            </button>
+        </div>
+    </div>
+    
+    <div class="modal" id="modalLogin">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🔐 Finalizar Compra</h2>
+                <div style="background: rgba(0, 102, 204, 0.2); border: 1px solid #0066cc; border-radius: 10px; padding: 15px; margin-top: 15px;">
+                    <p style="color: #00d9ff; font-size: 14px; margin-bottom: 5px;">📦 Produto</p>
+                    <p style="color: #ffffff; font-size: 18px; font-weight: bold; margin-bottom: 10px;">CERTIFICADO GBOX</p>
+                    <p id="planoSelecionado" style="color: #4d94ff; font-size: 14px; margin-bottom: 5px;">Plano: Nenhum</p>
+                    <p id="precoSelecionado" style="color: #00ff88; font-size: 24px; font-weight: bold;">R$ 0,00</p>
+                </div>
+            </div>
+            <form onsubmit="processarCompra(event)">
+                <div class="form-group">
+                    <label>� Email</label>
+                    <input type="email" id="emailInput" placeholder="seu@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label>🔒 Senha</label>
+                    <input type="password" id="senhaInput" placeholder="Digite sua senha" required>
+                </div>
+                <button type="submit" class="btn-modal">💳 Finalizar Compra</button>
+                <button type="button" class="btn-modal btn-cancelar" onclick="fecharModal()">Cancelar</button>
+            </form>
+        </div>
+    </div>
+    
+    <div class="modal-pix" id="modalPix">
+        <div class="modal-pix-content">
+            <button onclick="fecharModalPix()" style="position: absolute; top: 15px; right: 15px; background: rgba(255, 0, 0, 0.3); border: 2px solid #ff4444; color: #fff; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 20px; font-weight: bold; z-index: 10;">✕</button>
+            
+            <div class="modal-pix-header">
+                <h2>💳 Pagamento via PIX</h2>
+                <p>Escaneie o QR Code ou copie a chave PIX</p>
+            </div>
+            
+            <div class="resumo-compra">
+                <p><strong>Produto:</strong> CERTIFICADO GBOX</p>
+                <p id="planoPixResumo"><strong>Plano:</strong> -</p>
+                <p class="preco-total" id="precoPixTotal">R$ 0,00</p>
+            </div>
+            
+            <div class="qrcode-container">
+                <canvas id="qrcode"></canvas>
+            </div>
+            
+            <div class="pix-key-container">
+                <div class="pix-key-label">🔑 Chave PIX (Copie e Cole)</div>
+                <div class="pix-key-value" id="pixKey">sua-chave-pix@exemplo.com</div>
+                <button class="btn-copiar-pix" onclick="copiarChavePix()">📋 Copiar Chave PIX</button>
+            </div>
+            
+            <div class="aviso-pagamento">
+                <p style="font-size: 18px; font-weight: bold; color: #ff3333;">⚠️ ATENÇÃO: DIGITE O VALOR EXATO!</p>
+                <p style="font-size: 28px; font-weight: bold; color: #00ff88; margin: 15px 0;" id="valorExato">R$ 0,00</p>
+                <p style="font-size: 15px;">Digite este valor EXATAMENTE no seu app de pagamento PIX</p>
+                <p style="margin-top: 15px;">📱 Após pagar, envie o comprovante abaixo</p>
+            </div>
+            
+            <div id="comprovanteSection" style="background: rgba(0, 102, 204, 0.2); border: 2px solid #0066cc; border-radius: 15px; padding: 20px; margin-top: 20px;">
+                <h3 style="color: #00d9ff; font-size: 18px; margin-bottom: 15px;">📤 Enviar Comprovante</h3>
+                
+                <div style="margin-bottom: 15px;">
+                    <label for="comprovanteInput" style="display: block; color: #fff; margin-bottom: 10px; font-size: 14px;">
+                        Selecione a imagem do comprovante:
+                    </label>
+                    <input type="file" id="comprovanteInput" accept="image/*" style="display: block; width: 100%; padding: 10px; background: rgba(0, 26, 51, 0.5); border: 2px solid #0066cc; border-radius: 10px; color: #fff; cursor: pointer;" onchange="previewComprovante(event)">
+                </div>
+                
+                <div id="comprovantePreview" style="display: none; margin: 15px 0; text-align: center;">
+                    <p style="color: #00d9ff; margin-bottom: 10px;">Preview:</p>
+                    <img id="previewImage" style="max-width: 100%; max-height: 200px; border: 2px solid #0066cc; border-radius: 10px;">
+                </div>
+                
+                <button id="btnEnviarComprovante" class="btn-copiar-pix" onclick="enviarComprovante()" disabled style="opacity: 0.5;">
+                    📤 Enviar Comprovante
+                </button>
+                
+                <div id="statusEnvio" style="display: none; margin-top: 15px; padding: 15px; border-radius: 10px;"></div>
+            </div>
+            
+            <div id="discordSection" style="display: none; background: rgba(0, 255, 136, 0.2); border: 2px solid #00ff88; border-radius: 15px; padding: 20px; margin-top: 20px; text-align: center;">
+                <h3 style="color: #00ff88; font-size: 20px; margin-bottom: 15px;">✅ Comprovante Enviado!</h3>
+                <p style="color: #fff; margin-bottom: 15px;">Seu comprovante foi recebido. Clique no botão abaixo para receber seu produto no Discord.</p>
+                <a href="https://discord.gg/J6YbmjEV" target="_blank" style="display: inline-block; background: linear-gradient(45deg, #00ff88, #00cc66); color: #000; padding: 15px 30px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 18px; margin-top: 10px;">
+                    💬 Receber no Discord
+                </a>
+                <p style="color: #00d9ff; margin-top: 15px; font-size: 14px;">📧 Um email foi enviado para <span id="emailCliente"></span> com as instruções!</p>
+            </div>
+            
+            <button class="btn-fechar-pix" onclick="fecharModalPix()">Fechar</button>
+        </div>
+    </div>
+    
+    <a href="https://discord.gg/J6YbmjEV" target="_blank" class="discord-float">
+        <img src="discord.jfif" alt="Discord">
+    </a>
+    
+    <div class="footer">
+        <a href="termos.html">🛒🔒 Termos de Compra, Garantia e Responsabilidades</a>
+        <p>© 2026 Lartxcheats - Todos os direitos reservados</p>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script>
+    <script>
+        particlesJS("particles-js", {
+            particles: {
+                number: {value: 80},
+                color: {value: "#ffffff"},
+                size: {value: 3},
+                move: {
+                    enable: true,
+                    speed: 2
+                }
+            }
+        });
+        
+        const rain = document.getElementById('rain');
+        for(let i = 0; i < 30; i++){
+            let icon = document.createElement('img');
+            icon.src = 'ffh4x.png';
+            icon.className = 'rain-icon';
+            icon.style.left = Math.random() * 100 + '%';
+            icon.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            icon.style.animationDelay = Math.random() * 5 + 's';
+            rain.appendChild(icon);
+        }
+        
+        let planoEscolhido = null;
+        let precoEscolhido = 0;
+        const CHAVE_PIX = "23652c43-84f7-45a6-9c59-dc11b8f80ed3";
+        
+        function selecionarPlano(plano, preco) {
+            document.querySelectorAll('.plano-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            event.target.closest('.plano-card').classList.add('selected');
+            
+            planoEscolhido = plano;
+            precoEscolhido = preco;
+            
+            const btnComprar = document.getElementById('btnComprar');
+            btnComprar.disabled = false;
+            
+            // Formatar preço corretamente
+            const precoFormatado = preco.toFixed(2).replace('.', ',');
+            btnComprar.textContent = `🛒 Comprar por R$ ${precoFormatado}`;
+        }
+        
+        function abrirModal() {
+            if (!planoEscolhido) return;
+            
+            const planoTexto = {
+                'anual': 'Certificado Anual'
+            };
+            
+            document.getElementById('planoSelecionado').textContent = `⏱️ Plano: ${planoTexto[planoEscolhido]}`;
+            const precoFormatado = precoEscolhido.toFixed(2).replace('.', ',');
+            document.getElementById('precoSelecionado').textContent = `R$ ${precoFormatado}`;
+            document.getElementById('modalLogin').classList.add('active');
+        }
+        
+        function fecharModal() {
+            document.getElementById('modalLogin').classList.remove('active');
+            document.getElementById('emailInput').value = '';
+            document.getElementById('senhaInput').value = '';
+        }
+        
+        function processarCompra(event) {
+            event.preventDefault();
+            console.log('🔵 processarCompra() chamada');
+            
+            const email = document.getElementById('emailInput').value;
+            const senha = document.getElementById('senhaInput').value;
+            console.log('🔵 Email:', email, 'Senha:', senha);
+            
+            // Salvar email globalmente
+            emailClienteGlobal = email;
+            
+            console.log('🔵 Fechando modal de login...');
+            fecharModal();
+            
+            console.log('🔵 Abrindo modal PIX...');
+            abrirModalPix();
+            console.log('🔵 abrirModalPix() executada');
+        }
+        
+        function abrirModalPix() {
+            console.log('🟢 abrirModalPix() INICIADA');
+            console.log('🟢 Plano escolhido:', planoEscolhido);
+            console.log('🟢 Preço escolhido:', precoEscolhido);
+            
+            const planoTexto = {
+                'anual': 'Certificado Anual'
+            };
+            
+            console.log('🟢 Atualizando resumo da compra...');
+            document.getElementById('planoPixResumo').innerHTML = `<strong>Plano:</strong> ${planoTexto[planoEscolhido]}`;
+            const precoFormatado = precoEscolhido.toFixed(2).replace('.', ',');
+            document.getElementById('precoPixTotal').textContent = `R$ ${precoFormatado}`;
+            document.getElementById('valorExato').textContent = `R$ ${precoFormatado}`;
+            document.getElementById('pixKey').textContent = CHAVE_PIX;
+            console.log('🟢 Resumo atualizado');
+            console.log('🟢 Chave PIX definida:', CHAVE_PIX);
+            
+            // Abrir modal ANTES de gerar QR Code
+            console.log('🟢 Abrindo modal PIX...');
+            const modalPix = document.getElementById('modalPix');
+            console.log('🟢 Modal PIX element:', modalPix);
+            modalPix.classList.add('active');
+            console.log('🟢 Classe "active" adicionada');
+            console.log('🟢 Display do modal:', window.getComputedStyle(modalPix).display);
+            
+            // Gerar QR Code depois (não bloqueia a abertura do modal)
+            console.log('🟢 Gerando QR Code...');
+            const canvas = document.getElementById('qrcode');
+            console.log('🟢 Canvas encontrado:', canvas);
+            
+            if (typeof QRCode === 'undefined') {
+                console.error('❌ Biblioteca QRCode não carregada!');
+                canvas.parentElement.innerHTML = '<p style="color: #ff3333;">⚠️ QR Code não disponível. Use a chave PIX abaixo.</p>';
+            } else {
+                console.log('🟢 Biblioteca QRCode disponível');
+                try {
+                    QRCode.toCanvas(canvas, CHAVE_PIX, {
+                        width: 250,
+                        margin: 2,
+                        color: {
+                            dark: '#000000',
+                            light: '#ffffff'
+                        }
+                    }, function(error) {
+                        if (error) {
+                            console.error('❌ Erro ao gerar QR Code:', error);
+                            canvas.parentElement.innerHTML = '<p style="color: #ff3333;">⚠️ Erro ao gerar QR Code. Use a chave PIX abaixo.</p>';
+                        } else {
+                            console.log('🟢 QR Code gerado com sucesso!');
+                        }
+                    });
+                } catch (error) {
+                    console.error('❌ Exceção ao gerar QR Code:', error);
+                    canvas.parentElement.innerHTML = '<p style="color: #ff3333;">⚠️ Erro ao gerar QR Code. Use a chave PIX abaixo.</p>';
+                }
+            }
+            
+            console.log('🟢 abrirModalPix() CONCLUÍDA');
+        }
+        
+        function fecharModalPix() {
+            document.getElementById('modalPix').classList.remove('active');
+        }
+        
+        function copiarChavePix() {
+            const chavePix = document.getElementById('pixKey').textContent;
+            
+            navigator.clipboard.writeText(chavePix).then(() => {
+                const btn = document.querySelector('.btn-copiar-pix');
+                const textoOriginal = btn.textContent;
+                btn.textContent = '✅ Chave Copiada!';
+                btn.style.background = 'linear-gradient(45deg, #00ff88, #00ffaa)';
+                
+                setTimeout(() => {
+                    btn.textContent = textoOriginal;
+                    btn.style.background = 'linear-gradient(45deg, #00ff88, #00cc66)';
+                }, 2000);
+            }).catch(err => {
+                alert('Erro ao copiar. Copie manualmente: ' + chavePix);
+            });
+        }
+        
+        let comprovanteFile = null;
+        let emailClienteGlobal = '';
+        let comprovanteValido = false;
+        
+        function previewComprovante(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            // Validação: Verificar se é imagem
+            if (!file.type.startsWith('image/')) {
+                alert('❌ Por favor, selecione apenas arquivos de imagem (PNG, JPG, JPEG)');
+                event.target.value = '';
+                return;
+            }
+            
+            // Validação: Tamanho máximo 10MB (para não travar o navegador)
+            if (file.size > 10000000) {
+                alert('❌ Imagem muito grande. Máximo 10MB.');
+                event.target.value = '';
+                return;
+            }
+            
+            comprovanteFile = file;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                // Mostrar preview
+                document.getElementById('previewImage').src = e.target.result;
+                document.getElementById('comprovantePreview').style.display = 'block';
+                
+                // Iniciar validação por OCR
+                validarComprovanteOCR(e.target.result);
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        function validarComprovanteOCR(imageSrc) {
+            const statusDiv = document.getElementById('statusEnvio');
+            statusDiv.style.display = 'block';
+            statusDiv.style.background = 'rgba(0, 217, 255, 0.2)';
+            statusDiv.style.border = '1px solid #00d9ff';
+            statusDiv.style.color = '#00d9ff';
+            statusDiv.innerHTML = '🔍 Analisando comprovante... Aguarde.';
+            
+            document.getElementById('btnEnviarComprovante').disabled = true;
+            document.getElementById('btnEnviarComprovante').style.opacity = '0.5';
+            
+            // Usar Tesseract.js para OCR
+            Tesseract.recognize(
+                imageSrc,
+                'por', // Português
+                {
+                    logger: m => {
+                        if (m.status === 'recognizing text') {
+                            const progress = Math.round(m.progress * 100);
+                            statusDiv.innerHTML = `🔍 Analisando comprovante... ${progress}%`;
+                        }
+                    }
+                }
+            ).then(({ data: { text } }) => {
+                console.log('📄 Texto extraído:', text);
+                
+                // Palavras-chave que indicam um comprovante válido
+                const palavrasChave = [
+                    'pix', 'comprovante', 'pagamento', 'transferencia', 'transferência',
+                    'banco', 'nubank', 'itau', 'itaú', 'bradesco', 'santander', 'caixa',
+                    'inter', 'c6', 'original', 'next', 'picpay', 'mercado pago',
+                    'valor', 'data', 'hora', 'destinatario', 'destinatário', 'recebedor',
+                    'chave', 'cpf', 'cnpj', 'email', 'telefone', 'aleatoria', 'aleatória',
+                    'transacao', 'transação', 'id', 'codigo', 'código', 'autenticacao', 'autenticação'
+                ];
+                
+                // Verificar nome do destinatário (seu nome)
+                const nomeDestinatario = ['gustavo', 'almeida', 'goulart'];
+                
+                // Verificar valor do pagamento
+                const valorEsperado = precoEscolhido; // Valor que o cliente escolheu
+                const valoresAceitos = [
+                    `${valorEsperado},00`,
+                    `${valorEsperado}.00`,
+                    `r$ ${valorEsperado}`,
+                    `r$${valorEsperado}`,
+                    `${valorEsperado}reais`,
+                    `${valorEsperado} reais`
+                ];
+                
+                const textoLower = text.toLowerCase();
+                let palavrasEncontradas = 0;
+                let palavrasDetectadas = [];
+                let nomeEncontrado = false;
+                let partesNomeEncontradas = [];
+                let valorEncontrado = false;
+                
+                // Verificar palavras-chave
+                palavrasChave.forEach(palavra => {
+                    if (textoLower.includes(palavra)) {
+                        palavrasEncontradas++;
+                        palavrasDetectadas.push(palavra);
+                    }
+                });
+                
+                // Verificar nome do destinatário
+                nomeDestinatario.forEach(parte => {
+                    if (textoLower.includes(parte)) {
+                        nomeEncontrado = true;
+                        partesNomeEncontradas.push(parte);
+                    }
+                });
+                
+                // Verificar valor
+                valoresAceitos.forEach(valor => {
+                    if (textoLower.includes(valor)) {
+                        valorEncontrado = true;
+                    }
+                });
+                
+                // Verificação adicional: procurar padrão de número com vírgula ou ponto
+                const regexValor = new RegExp(`\\b${valorEsperado}[,.]\\d{2}\\b`, 'i');
+                if (regexValor.test(text)) {
+                    valorEncontrado = true;
+                }
+                
+                console.log('✅ Palavras-chave encontradas:', palavrasEncontradas);
+                console.log('📋 Palavras detectadas:', palavrasDetectadas);
+                console.log('👤 Nome encontrado:', nomeEncontrado);
+                console.log('📝 Partes do nome:', partesNomeEncontradas);
+                console.log('💰 Valor esperado:', valorEsperado);
+                console.log('💰 Valor encontrado:', valorEncontrado);
+                
+                // Validação completa: palavras-chave + nome + valor
+                if (palavrasEncontradas >= 3 && nomeEncontrado && valorEncontrado) {
+                    comprovanteValido = true;
+                    statusDiv.style.background = 'rgba(0, 255, 136, 0.2)';
+                    statusDiv.style.border = '1px solid #00ff88';
+                    statusDiv.style.color = '#00ff88';
+                    const valorFormatado = valorEsperado.toFixed(2).replace('.', ',');
+                    statusDiv.innerHTML = `✅ Comprovante válido!<br>✓ Destinatário: Gustavo Almeida Goulart<br>✓ Valor: R$ ${valorFormatado}<br>✓ Detectadas: ${palavrasDetectadas.slice(0, 4).join(', ')}`;
+                    
+                    document.getElementById('btnEnviarComprovante').disabled = false;
+                    document.getElementById('btnEnviarComprovante').style.opacity = '1';
+                } else if (palavrasEncontradas >= 3 && nomeEncontrado && !valorEncontrado) {
+                    comprovanteValido = false;
+                    statusDiv.style.background = 'rgba(255, 51, 51, 0.2)';
+                    statusDiv.style.border = '1px solid #ff3333';
+                    statusDiv.style.color = '#ff3333';
+                    const valorFormatado = valorEsperado.toFixed(2).replace('.', ',');
+                    statusDiv.innerHTML = `❌ Valor incorreto no comprovante!<br>Esperado: R$ ${valorFormatado}<br>Verifique se pagou o valor exato.`;
+                    
+                    document.getElementById('btnEnviarComprovante').disabled = true;
+                    document.getElementById('btnEnviarComprovante').style.opacity = '0.5';
+                } else if (palavrasEncontradas >= 3 && !nomeEncontrado) {
+                    comprovanteValido = false;
+                    statusDiv.style.background = 'rgba(255, 51, 51, 0.2)';
+                    statusDiv.style.border = '1px solid #ff3333';
+                    statusDiv.style.color = '#ff3333';
+                    statusDiv.innerHTML = `❌ Comprovante não é para o destinatário correto!<br>Esperado: Gustavo Almeida Goulart<br>Verifique se o pagamento foi feito para a chave PIX correta.`;
+                    
+                    document.getElementById('btnEnviarComprovante').disabled = true;
+                    document.getElementById('btnEnviarComprovante').style.opacity = '0.5';
+                } else {
+                    comprovanteValido = false;
+                    statusDiv.style.background = 'rgba(255, 51, 51, 0.2)';
+                    statusDiv.style.border = '1px solid #ff3333';
+                    statusDiv.style.color = '#ff3333';
+                    statusDiv.innerHTML = `❌ Imagem não parece ser um comprovante válido.<br>Detectadas apenas ${palavrasEncontradas} palavras-chave.<br>Tente outra imagem mais clara ou tire um print melhor.`;
+                    
+                    document.getElementById('btnEnviarComprovante').disabled = true;
+                    document.getElementById('btnEnviarComprovante').style.opacity = '0.5';
+                }
+            }).catch(err => {
+                console.error('Erro no OCR:', err);
+                // Se OCR falhar, permitir envio mesmo assim (pode ser problema de conexão)
+                comprovanteValido = true;
+                statusDiv.style.background = 'rgba(255, 200, 0, 0.2)';
+                statusDiv.style.border = '1px solid #ffc800';
+                statusDiv.style.color = '#ffc800';
+                statusDiv.innerHTML = '⚠️ Não foi possível validar automaticamente. Você pode enviar, mas certifique-se de que é um comprovante válido.';
+                
+                document.getElementById('btnEnviarComprovante').disabled = false;
+                document.getElementById('btnEnviarComprovante').style.opacity = '1';
+            });
+        }
+        
+        function enviarComprovante() {
+            if (!comprovanteFile) {
+                alert('Por favor, selecione um comprovante primeiro.');
+                return;
+            }
+            
+            const statusDiv = document.getElementById('statusEnvio');
+            statusDiv.style.display = 'block';
+            statusDiv.style.background = 'rgba(0, 217, 255, 0.2)';
+            statusDiv.style.border = '1px solid #00d9ff';
+            statusDiv.style.color = '#00d9ff';
+            statusDiv.innerHTML = '⏳ Enviando comprovante...';
+            
+            // Simular envio (em produção, aqui você faria o upload real)
+            setTimeout(() => {
+                statusDiv.style.background = 'rgba(0, 255, 136, 0.2)';
+                statusDiv.style.border = '1px solid #00ff88';
+                statusDiv.style.color = '#00ff88';
+                statusDiv.innerHTML = '✅ Comprovante enviado com sucesso!';
+                
+                // Esconder seção de upload
+                document.getElementById('comprovanteSection').style.display = 'none';
+                
+                // Mostrar seção do Discord
+                document.getElementById('discordSection').style.display = 'block';
+                document.getElementById('emailCliente').textContent = emailClienteGlobal;
+                
+                // Simular envio de email
+                enviarEmailConfirmacao();
+                
+            }, 2000);
+        }
+        
+        function enviarEmailConfirmacao() {
+            // Em produção, aqui você chamaria uma API para enviar o email
+            console.log('📧 Email enviado para:', emailClienteGlobal);
+            console.log('Conteúdo do email:');
+            console.log('---');
+            console.log('Assunto: Comprovante Recebido - Lartxcheats');
+            console.log('Para:', emailClienteGlobal);
+            console.log('Mensagem:');
+            console.log('Olá!');
+            console.log('');
+            console.log('Recebemos seu comprovante de pagamento!');
+            console.log('');
+            console.log('Para receber seu produto, acesse nosso Discord:');
+            console.log('https://discord.gg/J6YbmjEV');
+            console.log('');
+            console.log('Obrigado pela compra!');
+            console.log('Equipe Lartxcheats');
+            console.log('---');
+        }
+    </script>
+</body>
+</html>

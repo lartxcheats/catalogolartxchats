@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PRODUTOS - iOS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #000000;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            animation: mudaCor 10s infinite;
+        }
+        
+        @keyframes mudaCor {
+            0% { background-color: #000000; }
+            25% { background-color: #0a0a1a; }
+            50% { background-color: #001a33; }
+            75% { background-color: #0a0a1a; }
+            100% { background-color: #000000; }
+        }
+        
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            animation: mudaCor 10s infinite;
+        }
+        
+        .rain-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .rain-icon {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            opacity: 0.5;
+            animation: fall linear infinite;
+        }
+        
+        @keyframes fall {
+            0% { transform: translateY(-100px); }
+            100% { transform: translateY(100vh); }
+        }
+        
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .btn-voltar {
+            background: rgba(0, 102, 204, 0.3);
+            color: #4d94ff;
+            border: 2px solid #0066cc;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-right: 30px;
+        }
+        
+        .btn-voltar:hover {
+            background: rgba(0, 102, 204, 0.6);
+        }
+        
+        .page-title {
+            color: #ffffff;
+            font-size: 36px;
+            font-weight: bold;
+        }
+        
+        .produtos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .produto-card {
+            background: linear-gradient(to bottom, #0a0a1a 0%, #001a33 50%, #000000 100%);
+            border: 2px solid #0066cc;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0, 102, 204, 0.5);
+        }
+        
+        .produto-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 170, 255, 0.7);
+            border-color: #00d9ff;
+        }
+        
+        .produto-imagem {
+            width: 100%;
+            height: 200px;
+            background: rgba(0, 26, 51, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+        }
+        
+        .produto-info {
+            padding: 20px;
+        }
+        
+        .produto-nome {
+            color: #00d9ff;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .produto-preco {
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .produto-subtitulo {
+            color: #4d94ff;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .btn-comprar {
+            width: 100%;
+            background: linear-gradient(45deg, #0066cc, #2600ff);
+            color: white;
+            border: 2px solid #4d94ff;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        
+        .btn-comprar:hover {
+            background: linear-gradient(45deg, #0077dd, #00bbff);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 170, 255, 0.7);
+        }
+        
+        .discord-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 80px;
+            height: 80px;
+            background: #5865F2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 20px rgba(88, 101, 242, 0.6);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .discord-float:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(88, 101, 242, 0.8);
+        }
+        
+        .discord-float img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <div class="rain-container" id="rain"></div>
+    
+    <div class="header">
+        <a href="links.html" class="btn-voltar">← Voltar</a>
+        <h1 class="page-title">IOS</h1>
+    </div>
+    
+    <div class="produtos-grid">
+        
+        <div class="produto-card" onclick="window.location.href='hs-pescoco.html'">
+            <div class="produto-imagem">🎯</div>
+            <div class="produto-info">
+                <div class="produto-nome">HS PESCOÇO</div>
+                <div class="produto-preco">R$ 20,00+</div>
+                <div class="produto-subtitulo">À vista no Pix</div>
+                <button class="btn-comprar">🛒 Comprar agora</button>
+            </div>
+        </div>
+        
+        <div class="produto-card" onclick="window.location.href='ffh4x-todos-ios.html'">
+            <div class="produto-imagem">📱</div>
+            <div class="produto-info">
+                <div class="produto-nome">FFH4X TODOS IOS</div>
+                <div class="produto-preco">R$ 20,00+</div>
+                <div class="produto-subtitulo">À vista no Pix</div>
+                <button class="btn-comprar">🛒 Comprar agora</button>
+            </div>
+        </div>
+        
+        <div class="produto-card" onclick="window.location.href='bypass-ios.html'">
+            <div class="produto-imagem">📡</div>
+            <div class="produto-info">
+                <div class="produto-nome">BYPASS IOS VIA WIFI</div>
+                <div class="produto-preco">R$ 20,00+</div>
+                <div class="produto-subtitulo">À vista no Pix</div>
+                <button class="btn-comprar">🛒 Comprar agora</button>
+            </div>
+        </div>
+        
+        <div class="produto-card" onclick="window.location.href='ffh4x-modaimkill.html'">
+            <div class="produto-imagem">🎮</div>
+            <div class="produto-info">
+                <div class="produto-nome">FFH4X MODAIMKILL</div>
+                <div class="produto-preco">R$ 20,00+</div>
+                <div class="produto-subtitulo">À vista no Pix</div>
+                <button class="btn-comprar">🛒 Comprar agora</button>
+            </div>
+        </div>
+        
+    </div>
+    
+    <a href="https://discord.gg/J6YbmjEV" target="_blank" class="discord-float">
+        <img src="discord.jfif" alt="Discord">
+    </a>
+    
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS("particles-js", {
+            particles: {
+                number: {value: 80},
+                color: {value: "#ffffff"},
+                size: {value: 3},
+                move: {
+                    enable: true,
+                    speed: 2
+                }
+            }
+        });
+        
+        const rain = document.getElementById('rain');
+        for(let i = 0; i < 30; i++){
+            let icon = document.createElement('img');
+            icon.src = 'ffh4x.png';
+            icon.className = 'rain-icon';
+            icon.style.left = Math.random() * 100 + '%';
+            icon.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            icon.style.animationDelay = Math.random() * 5 + 's';
+            rain.appendChild(icon);
+        }
+    </script>
+</body>
+</html>

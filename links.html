@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo - lartxcheats</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #000000;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 80px;
+            animation: mudaCor 10s infinite;
+        }
+        
+        @keyframes mudaCor {
+            0% { background-color: #000000; }
+            25% { background-color: #0a0a1a; }
+            50% { background-color: #001a33; }
+            75% { background-color: #0a0a1a; }
+            100% { background-color: #000000; }
+        }
+        
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            animation: mudaCor 10s infinite;
+        }
+        
+        .rain-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .rain-icon {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            opacity: 0.5;
+            animation: fall linear infinite;
+        }
+        
+        @keyframes fall {
+            0% { transform: translateY(-100px); }
+            100% { transform: translateY(100vh); }
+        }
+        
+        .btn-voltar {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            background: rgba(0, 102, 204, 0.3);
+            color: #4d94ff;
+            border: 2px solid #0066cc;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        
+        .btn-voltar:hover {
+            background: rgba(0, 102, 204, 0.6);
+        }
+        
+        h1 {
+            color: #4d94ff;
+            font-size: 50px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8),
+                         0 0 15px rgba(77, 148, 255, 0.4);
+            margin-bottom: 20px;
+            z-index: 10;
+            position: relative;
+        }
+        
+        .subtitle {
+            color: white;
+            font-size: 20px;
+            margin-bottom: 60px;
+            z-index: 10;
+            position: relative;
+        }
+        
+        .categorias-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 250px));
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+            justify-content: center;
+            z-index: 10;
+            position: relative;
+        }
+        
+        .categoria-card {
+            background: linear-gradient(to bottom, #0a0a1a 0%, #001a33 50%, #000000 100%);
+            border: 2px solid #0066cc;
+            border-radius: 15px;
+            padding: 40px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 102, 204, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .categoria-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 170, 255, 0.7);
+            border-color: #00d9ff;
+        }
+        
+        .categoria-label {
+            background: rgba(0, 102, 204, 0.3);
+            color: #4d94ff;
+            font-size: 10px;
+            padding: 5px 10px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        
+        .categoria-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+        
+        .categoria-nome {
+            color: #00d9ff;
+            font-size: 32px;
+            font-weight: bold;
+        }
+        
+        .categoria-imagem {
+            width: 120px;
+            height: 110px;
+            object-fit: contain;
+            margin-bottom: 30px;
+            margin-left: -10px;
+            opacity: 0.3;
+            filter: drop-shadow(0 0 30px rgba(0, 217, 255, 0.8));
+        }
+        
+        .categoria-subtitulo {
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 10px;
+            margin-left: -20px;
+        }
+        
+        .discord-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 80px;
+            height: 80px;
+            background: #5865F2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 20px rgba(88, 101, 242, 0.6);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .discord-float:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(88, 101, 242, 0.8);
+        }
+        
+        .discord-float img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <div class="rain-container" id="rain"></div>
+    
+    <a href="index.html" class="btn-voltar">← Voltar</a>
+    
+    <h1>Catálogo de Produtos</h1>
+    <p class="subtitle">Escolha sua categoria</p>
+    
+    <div class="categorias-container">
+        
+        <div class="categoria-card" onclick="window.location.href='ffh4x.html'">
+            <div class="categoria-label">categoria</div>
+            <div class="categoria-nome">IOS</div>
+            <img src="mac-os.png" alt="iOS" class="categoria-imagem">
+            <div class="categoria-subtitulo">IOS</div>
+        </div>
+        
+        <div class="categoria-card" onclick="window.location.href='painel-android.html'">
+            <div class="categoria-label">categoria</div>
+            <div class="categoria-nome">ANDROID</div>
+            <img src="android.png" alt="Android" class="categoria-imagem">
+            <div class="categoria-subtitulo">ANDROID</div>
+        </div>
+        
+        <div class="categoria-card" onclick="window.open('https://www.tiktok.com/@lartxcheats?is_from_webapp=1&sender_device=pc', '_blank')">
+            <div class="categoria-label">categoria</div>
+            <div class="categoria-icon">⚙️</div>
+            <div class="categoria-nome">OUTROS</div>
+        </div>
+        
+    </div>
+    
+    <a href="https://discord.gg/J6YbmjEV" target="_blank" class="discord-float">
+        <img src="discord.jfif" alt="Discord">
+    </a>
+    
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS("particles-js", {
+            particles: {
+                number: {value: 80},
+                color: {value: "#ffffff"},
+                size: {value: 3},
+                move: {
+                    enable: true,
+                    speed: 2
+                }
+            }
+        });
+        
+        const rain = document.getElementById('rain');
+        for(let i = 0; i < 30; i++){
+            let icon = document.createElement('img');
+            icon.src = 'ffh4x.png';
+            icon.className = 'rain-icon';
+            icon.style.left = Math.random() * 100 + '%';
+            icon.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            icon.style.animationDelay = Math.random() * 5 + 's';
+            rain.appendChild(icon);
+        }
+    </script>
+</body>
+</html>

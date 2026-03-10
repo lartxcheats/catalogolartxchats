@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Teste Rápido - Sistema PIX</title>
+    <style>
+        body {
+            background: #000;
+            color: #fff;
+            font-family: Arial;
+            padding: 40px;
+            line-height: 1.6;
+        }
+        
+        h1 {
+            color: #00d9ff;
+            border-bottom: 2px solid #0066cc;
+            padding-bottom: 10px;
+        }
+        
+        .test-section {
+            background: #001a33;
+            border: 2px solid #0066cc;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #0066cc, #2600ff);
+            color: white;
+            border: 2px solid #4d94ff;
+            padding: 15px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn:hover {
+            background: linear-gradient(45deg, #0077dd, #00bbff);
+            transform: translateY(-2px);
+        }
+        
+        .status {
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        
+        .success {
+            background: rgba(0, 255, 136, 0.2);
+            border: 1px solid #00ff88;
+            color: #00ff88;
+        }
+        
+        .error {
+            background: rgba(255, 51, 51, 0.2);
+            border: 1px solid #ff3333;
+            color: #ff3333;
+        }
+        
+        .info {
+            background: rgba(0, 217, 255, 0.2);
+            border: 1px solid #00d9ff;
+            color: #00d9ff;
+        }
+        
+        code {
+            background: #000;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #00ff88;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Teste Rápido do Sistema PIX</h1>
+    
+    <div class="test-section">
+        <h2>📋 Instruções de Teste</h2>
+        <ol>
+            <li>Abra cada arquivo de produto abaixo em uma nova aba</li>
+            <li>Clique em qualquer plano (1 Dia, 7 Dias, etc)</li>
+            <li>Clique no botão "Comprar"</li>
+            <li>Preencha: Email: <code>teste@teste.com</code> | Senha: <code>123456</code></li>
+            <li>Clique em "Finalizar Compra"</li>
+            <li>Verifique se o modal PIX aparece com QR Code e chave PIX</li>
+        </ol>
+    </div>
+    
+    <div class="test-section">
+        <h2>🎯 Arquivos para Testar</h2>
+        
+        <div style="margin: 15px 0;">
+            <strong>1. HS Pescoço</strong><br>
+            <a href="hs-pescoco.html" target="_blank" class="btn">🧪 Testar HS Pescoço</a>
+        </div>
+        
+        <div style="margin: 15px 0;">
+            <strong>2. FFH4X Todos iOS</strong><br>
+            <a href="ffh4x-todos-ios.html" target="_blank" class="btn">🧪 Testar FFH4X Todos iOS</a>
+        </div>
+        
+        <div style="margin: 15px 0;">
+            <strong>3. Bypass iOS</strong><br>
+            <a href="bypass-ios.html" target="_blank" class="btn">🧪 Testar Bypass iOS</a>
+        </div>
+        
+        <div style="margin: 15px 0;">
+            <strong>4. FFH4X ModAimKill</strong><br>
+            <a href="ffh4x-modaimkill.html" target="_blank" class="btn">🧪 Testar FFH4X ModAimKill</a>
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>✅ O que deve aparecer no Modal PIX</h2>
+        <div class="status success">
+            ✓ Título: "💳 Pagamento via PIX"
+        </div>
+        <div class="status success">
+            ✓ Nome do produto e plano selecionado
+        </div>
+        <div class="status success">
+            ✓ Preço em verde (ex: R$ 16,00)
+        </div>
+        <div class="status success">
+            ✓ QR Code gerado (quadrado preto e branco)
+        </div>
+        <div class="status success">
+            ✓ Chave PIX: 23652c43-84f7-45a6-9c59-dc11b8f80ed3
+        </div>
+        <div class="status success">
+            ✓ Botão "Copiar Chave PIX"
+        </div>
+        <div class="status success">
+            ✓ Aviso em VERMELHO: "⚠️ ATENÇÃO: DIGITE O VALOR EXATO!"
+        </div>
+        <div class="status success">
+            ✓ Valor em VERDE GRANDE (ex: R$ 16,00)
+        </div>
+        <div class="status success">
+            ✓ Instruções para enviar comprovante no Discord
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>❌ Problemas Comuns</h2>
+        
+        <div class="status error">
+            <strong>Se o modal não aparecer:</strong><br>
+            1. Abra o Console do navegador (F12)<br>
+            2. Vá na aba "Console"<br>
+            3. Procure por erros em vermelho<br>
+            4. Me envie a mensagem de erro
+        </div>
+        
+        <div class="status error">
+            <strong>Se o QR Code não aparecer:</strong><br>
+            1. Verifique se tem internet (biblioteca QRCode é online)<br>
+            2. Veja se aparece erro no console (F12)
+        </div>
+        
+        <div class="status info">
+            <strong>Teste alternativo:</strong><br>
+            Use o arquivo <code>debug-modal.html</code> que tem logs detalhados
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>🔍 Verificação Técnica</h2>
+        <p>Se quiser verificar o código, procure por:</p>
+        <ul>
+            <li><code>const CHAVE_PIX = "23652c43-84f7-45a6-9c59-dc11b8f80ed3";</code></li>
+            <li><code>function abrirModalPix()</code></li>
+            <li><code>&lt;canvas id="qrcode"&gt;&lt;/canvas&gt;</code></li>
+            <li><code>&lt;p id="valorExato"&gt;</code></li>
+            <li><code>QRCode.toCanvas(canvas, CHAVE_PIX, {...})</code></li>
+        </ul>
+    </div>
+    
+    <div class="test-section">
+        <h2>📱 Teste no Celular</h2>
+        <div class="status info">
+            Para testar no celular:<br>
+            1. Coloque os arquivos em um servidor web local<br>
+            2. Ou use extensão "Live Server" no VS Code<br>
+            3. Acesse pelo IP local do seu computador<br>
+            4. Teste escanear o QR Code com app de banco
+        </div>
+    </div>
+    
+    <div style="margin-top: 40px; padding: 20px; background: rgba(0, 102, 204, 0.2); border-radius: 10px; text-align: center;">
+        <p style="font-size: 18px; color: #00d9ff;">
+            <strong>💡 Dica:</strong> Teste primeiro o <code>debug-modal.html</code> que tem logs detalhados!
+        </p>
+        <a href="debug-modal.html" target="_blank" class="btn" style="margin-top: 10px;">🔍 Abrir Debug Modal</a>
+    </div>
+</body>
+</html>

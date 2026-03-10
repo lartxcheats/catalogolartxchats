@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug Modal - HS Pescoço</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #000;
+            color: #fff;
+            font-family: Arial;
+            padding: 30px;
+        }
+        
+        .debug-panel {
+            background: #001a33;
+            border: 2px solid #0066cc;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #0066cc, #2600ff);
+            color: white;
+            border: 2px solid #4d94ff;
+            padding: 15px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+            font-weight: bold;
+        }
+        
+        .btn:hover {
+            background: linear-gradient(45deg, #0077dd, #00bbff);
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .plano-card {
+            background: rgba(0, 26, 51, 0.5);
+            border: 2px solid #0066cc;
+            border-radius: 15px;
+            padding: 20px;
+            cursor: pointer;
+            display: inline-block;
+            margin: 10px;
+            text-align: center;
+            min-width: 150px;
+        }
+        
+        .plano-card:hover {
+            border-color: #00d9ff;
+        }
+        
+        .plano-card.selected {
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.4), rgba(0, 217, 255, 0.2));
+            border-color: #00d9ff;
+            box-shadow: 0 0 25px rgba(0, 217, 255, 0.6);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, #0a0a1a 0%, #001a33 100%);
+            border: 2px solid #0066cc;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+        }
+        
+        .modal-header h2 {
+            color: #00d9ff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            color: #00d9ff;
+            margin-bottom: 8px;
+        }
+        
+        .form-group input {
+            width: 100%;
+            background: rgba(0, 26, 51, 0.5);
+            border: 2px solid #0066cc;
+            border-radius: 10px;
+            padding: 15px;
+            color: white;
+            font-size: 16px;
+        }
+        
+        .log {
+            background: #000;
+            border: 1px solid #0066cc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        
+        .log-item {
+            padding: 5px;
+            border-bottom: 1px solid #003366;
+        }
+        
+        .log-success { color: #00ff88; }
+        .log-error { color: #ff3333; }
+        .log-info { color: #00d9ff; }
+    </style>
+</head>
+<body>
+    <h1>🔍 Debug do Sistema de Pagamento</h1>
+    
+    <div class="debug-panel">
+        <h2>Passo 1: Selecionar Plano</h2>
+        <div class="plano-card" onclick="selecionarPlano('1dia', 16)">
+            <div style="color: #00d9ff; font-size: 18px; font-weight: bold;">1 Dia</div>
+            <div style="color: #fff; font-size: 24px; font-weight: bold;">R$ 16,00</div>
+        </div>
+        <div class="plano-card" onclick="selecionarPlano('7dias', 23)">
+            <div style="color: #00d9ff; font-size: 18px; font-weight: bold;">7 Dias</div>
+            <div style="color: #fff; font-size: 24px; font-weight: bold;">R$ 23,00</div>
+        </div>
+        <p style="margin-top: 15px;">Plano selecionado: <span id="planoAtual" style="color: #00ff88;">Nenhum</span></p>
+        <p>Preço: <span id="precoAtual" style="color: #00ff88;">R$ 0,00</span></p>
+    </div>
+    
+    <div class="debug-panel">
+        <h2>Passo 2: Abrir Modal de Login</h2>
+        <button class="btn" id="btnComprar" onclick="abrirModal()" disabled>🛒 Selecione um Plano</button>
+    </div>
+    
+    <div class="debug-panel">
+        <h2>Passo 3: Testar Modal PIX Direto</h2>
+        <button class="btn" onclick="abrirModalPixDireto()">🔓 Abrir Modal PIX (Bypass)</button>
+    </div>
+    
+    <div class="debug-panel">
+        <h2>📋 Log de Eventos</h2>
+        <div class="log" id="logContainer"></div>
+        <button class="btn" onclick="limparLog()" style="margin-top: 10px;">Limpar Log</button>
+    </div>
+    
+    <!-- Modal Login -->
+    <div class="modal" id="modalLogin">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🔐 Finalizar Compra</h2>
+            </div>
+            <form onsubmit="processarCompra(event)">
+                <div class="form-group">
+                    <label>📧 Email</label>
+                    <input type="email" id="emailInput" placeholder="seu@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label>🔒 Senha</label>
+                    <input type="password" id="senhaInput" placeholder="Digite sua senha" required>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">💳 Finalizar Compra</button>
+                <button type="button" class="btn" onclick="fecharModal()" style="width: 100%; margin-top: 10px; background: rgba(255,0,0,0.3);">Cancelar</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Modal PIX -->
+    <div class="modal" id="modalPix">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>💳 Pagamento via PIX</h2>
+            </div>
+            
+            <div style="background: rgba(0, 102, 204, 0.2); border: 1px solid #0066cc; border-radius: 10px; padding: 20px; margin-bottom: 20px;">
+                <p style="color: #fff;"><strong>Produto:</strong> HS PESCOÇO</p>
+                <p style="color: #fff;" id="planoPixResumo"><strong>Plano:</strong> -</p>
+                <p style="color: #00ff88; font-size: 32px; font-weight: bold; margin-top: 10px;" id="precoPixTotal">R$ 0,00</p>
+            </div>
+            
+            <div style="background: rgba(0, 26, 51, 0.5); border: 2px solid #0066cc; border-radius: 10px; padding: 15px; margin: 20px 0;">
+                <p style="color: #00d9ff; margin-bottom: 10px;">🔑 Chave PIX:</p>
+                <p style="color: #fff; word-break: break-all; font-family: monospace;" id="pixKey">-</p>
+            </div>
+            
+            <div style="background: rgba(255, 200, 0, 0.1); border: 1px solid #ffc800; border-radius: 10px; padding: 15px;">
+                <p style="color: #ff3333; font-size: 18px; font-weight: bold;">⚠️ ATENÇÃO: DIGITE O VALOR EXATO!</p>
+                <p style="color: #00ff88; font-size: 28px; font-weight: bold; margin: 10px 0;" id="valorExato">R$ 0,00</p>
+                <p style="color: #ffc800;">Digite este valor EXATAMENTE no seu app de pagamento PIX</p>
+            </div>
+            
+            <button class="btn" onclick="fecharModalPix()" style="width: 100%; margin-top: 20px;">Fechar</button>
+        </div>
+    </div>
+    
+    <script>
+        let planoEscolhido = null;
+        let precoEscolhido = 0;
+        const CHAVE_PIX = "23652c43-84f7-45a6-9c59-dc11b8f80ed3";
+        
+        function log(message, type = 'info') {
+            const logContainer = document.getElementById('logContainer');
+            const timestamp = new Date().toLocaleTimeString();
+            const logItem = document.createElement('div');
+            logItem.className = `log-item log-${type}`;
+            logItem.textContent = `[${timestamp}] ${message}`;
+            logContainer.appendChild(logItem);
+            logContainer.scrollTop = logContainer.scrollHeight;
+            console.log(`[${type.toUpperCase()}] ${message}`);
+        }
+        
+        function limparLog() {
+            document.getElementById('logContainer').innerHTML = '';
+            log('Log limpo', 'info');
+        }
+        
+        function selecionarPlano(plano, preco) {
+            log(`Selecionando plano: ${plano} - R$ ${preco},00`, 'info');
+            
+            document.querySelectorAll('.plano-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            event.target.closest('.plano-card').classList.add('selected');
+            
+            planoEscolhido = plano;
+            precoEscolhido = preco;
+            
+            document.getElementById('planoAtual').textContent = plano;
+            document.getElementById('precoAtual').textContent = `R$ ${preco},00`;
+            
+            const btnComprar = document.getElementById('btnComprar');
+            btnComprar.disabled = false;
+            btnComprar.textContent = `🛒 Comprar por R$ ${preco},00`;
+            
+            log(`Plano selecionado com sucesso!`, 'success');
+        }
+        
+        function abrirModal() {
+            if (!planoEscolhido) {
+                log('ERRO: Nenhum plano selecionado!', 'error');
+                return;
+            }
+            
+            log('Abrindo modal de login...', 'info');
+            document.getElementById('modalLogin').classList.add('active');
+            log('Modal de login aberto', 'success');
+        }
+        
+        function fecharModal() {
+            log('Fechando modal de login...', 'info');
+            document.getElementById('modalLogin').classList.remove('active');
+            document.getElementById('emailInput').value = '';
+            document.getElementById('senhaInput').value = '';
+            log('Modal de login fechado', 'success');
+        }
+        
+        function processarCompra(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('emailInput').value;
+            const senha = document.getElementById('senhaInput').value;
+            
+            log(`Processando compra para: ${email}`, 'info');
+            log('Fechando modal de login...', 'info');
+            
+            fecharModal();
+            
+            log('Abrindo modal PIX...', 'info');
+            abrirModalPix();
+        }
+        
+        function abrirModalPix() {
+            log('Função abrirModalPix() chamada', 'info');
+            
+            const planoTexto = {
+                '1dia': '1 Dia',
+                '7dias': '7 Dias'
+            };
+            
+            log(`Configurando dados: Plano=${planoEscolhido}, Preço=R$ ${precoEscolhido},00`, 'info');
+            
+            document.getElementById('planoPixResumo').innerHTML = `<strong>Plano:</strong> ${planoTexto[planoEscolhido]}`;
+            document.getElementById('precoPixTotal').textContent = `R$ ${precoEscolhido},00`;
+            document.getElementById('valorExato').textContent = `R$ ${precoEscolhido},00`;
+            document.getElementById('pixKey').textContent = CHAVE_PIX;
+            
+            log('Dados configurados no modal PIX', 'success');
+            log('Adicionando classe "active" ao modal PIX...', 'info');
+            
+            const modalPix = document.getElementById('modalPix');
+            modalPix.classList.add('active');
+            
+            log('Modal PIX deveria estar visível agora!', 'success');
+            
+            // Verificar se realmente está visível
+            const isVisible = window.getComputedStyle(modalPix).display !== 'none';
+            log(`Modal PIX display: ${window.getComputedStyle(modalPix).display}`, isVisible ? 'success' : 'error');
+        }
+        
+        function abrirModalPixDireto() {
+            log('Teste direto: Abrindo modal PIX sem formulário', 'info');
+            
+            // Simular dados
+            planoEscolhido = '1dia';
+            precoEscolhido = 16;
+            
+            abrirModalPix();
+        }
+        
+        function fecharModalPix() {
+            log('Fechando modal PIX...', 'info');
+            document.getElementById('modalPix').classList.remove('active');
+            log('Modal PIX fechado', 'success');
+        }
+        
+        // Log inicial
+        log('Página carregada e pronta!', 'success');
+        log('Elementos encontrados:', 'info');
+        log(`- modalLogin: ${document.getElementById('modalLogin') ? 'OK' : 'ERRO'}`, document.getElementById('modalLogin') ? 'success' : 'error');
+        log(`- modalPix: ${document.getElementById('modalPix') ? 'OK' : 'ERRO'}`, document.getElementById('modalPix') ? 'success' : 'error');
+    </script>
+</body>
+</html>
