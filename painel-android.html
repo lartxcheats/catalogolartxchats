@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Android - lartxcheats</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: #000000;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            animation: mudaCor 10s infinite;
+        }
+
+        @keyframes mudaCor {
+            0%   { background-color: #000000; }
+            25%  { background-color: #0a0a1a; }
+            50%  { background-color: #001a33; }
+            75%  { background-color: #0a0a1a; }
+            100% { background-color: #000000; }
+        }
+
+        #particles-js {
+            position: fixed;
+            width: 100%; height: 100%;
+            top: 0; left: 0;
+            z-index: -1;
+            animation: mudaCor 10s infinite;
+        }
+
+        .btn-voltar {
+            position: fixed;
+            top: 30px; left: 30px;
+            background: rgba(0, 102, 204, 0.3);
+            color: #4d94ff;
+            border: 2px solid #0066cc;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        .btn-voltar:hover { background: rgba(0, 102, 204, 0.6); }
+
+        .card {
+            background: linear-gradient(to bottom, #0a0a1a, #001a33, #000000);
+            border: 2px solid #3ddc84;
+            border-radius: 20px;
+            padding: 50px 40px;
+            max-width: 480px;
+            width: 90%;
+            box-shadow: 0 0 40px rgba(61, 220, 132, 0.3);
+            position: relative;
+            z-index: 10;
+        }
+
+        .android-icon {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            margin-bottom: 25px;
+            filter: drop-shadow(0 0 20px rgba(61, 220, 132, 0.6));
+        }
+
+        .badge {
+            background: rgba(61, 220, 132, 0.15);
+            color: #3ddc84;
+            font-size: 11px;
+            padding: 5px 14px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid #3ddc84;
+        }
+
+        h1 {
+            color: #3ddc84;
+            font-size: 36px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(61, 220, 132, 0.5);
+        }
+
+        .mensagem {
+            color: #ccc;
+            font-size: 16px;
+            line-height: 1.7;
+            margin-bottom: 35px;
+        }
+
+        .mensagem span {
+            color: #3ddc84;
+            font-weight: bold;
+        }
+
+        .btn-discord {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: #5865F2;
+            color: white;
+            text-decoration: none;
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(88, 101, 242, 0.5);
+        }
+        .btn-discord:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(88, 101, 242, 0.8);
+            background: #4752c4;
+        }
+        .btn-discord img {
+            width: 28px; height: 28px;
+            object-fit: contain;
+        }
+
+        .discord-float {
+            position: fixed;
+            bottom: 30px; right: 30px;
+            width: 80px; height: 80px;
+            background: #5865F2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 20px rgba(88, 101, 242, 0.6);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        .discord-float:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(88, 101, 242, 0.8);
+        }
+        .discord-float img { width: 50px; height: 50px; object-fit: contain; }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+
+    <a href="links.html" class="btn-voltar">← Voltar</a>
+
+    <div class="card">
+        <img src="android.png" alt="Android" class="android-icon">
+        <div class="badge">🚧 Em Desenvolvimento</div>
+        <h1>Android</h1>
+        <p class="mensagem">
+            Estamos trabalhando nos produtos Android.<br><br>
+            Acesse nosso <span>Discord</span> para ter acesso a <span>alguns itens Android</span> disponíveis e ficar por dentro das novidades!
+        </p>
+        <a href="https://discord.gg/RvmsaWuuET" target="_blank" class="btn-discord">
+            <img src="discord.jfif" alt="Discord">
+            Acessar Discord
+        </a>
+    </div>
+
+    <a href="https://discord.gg/RvmsaWuuET" target="_blank" class="discord-float">
+        <img src="discord.jfif" alt="Discord">
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 80 },
+                color: { value: "#3ddc84" },
+                size: { value: 3 },
+                move: { enable: true, speed: 2 }
+            }
+        });
+    </script>
+</body>
+</html>

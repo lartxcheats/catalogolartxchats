@@ -221,7 +221,7 @@ Agora você receberá notificações automáticas quando alguém pagar!
 
 ## 📞 Suporte
 
-- Discord: discord.gg/J6YbmjEV
+- Discord: discord.gg/RvmsaWuuET
 - Email: suporte@lartxcheats.com
 
 ---

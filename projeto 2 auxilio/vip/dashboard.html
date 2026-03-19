@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#5865F2">
+    <meta name="description" content="Discord - Chat for Communities">
+    <title>Discord</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css">
+    <link rel="apple-touch-icon" href="discord-icon.png">
+</head>
+<body>
+    <div id="particles-js"></div>
+    
+    <!-- Círculo FOV Overlay -->
+    <div id="fovOverlay" class="fov-overlay">
+        <div id="fovCircle" class="fov-circle"></div>
+    </div>
+    
+    <div class="container">
+        <header>
+            <img src="../gu.jpeg" alt="Avatar" class="avatar">
+            <h1 class="titulo-gamer">
+                <span class="vip-badge">👑 VIP</span>
+                AUXILIO LartxCheats
+            </h1>
+            <button id="logoutBtn" class="install-btn">Sair</button>
+        </header>
+
+        <main>
+            <div class="card">
+                <!-- Abas -->
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="switchTab('aimbot')">Aimbot</button>
+                    <button class="tab-btn" onclick="switchTab('config')">Config</button>
+                    <button class="tab-btn" onclick="switchTab('info')">Info</button>
+                </div>
+
+                <!-- Conteúdo Aimbot -->
+                <div id="aimbot-tab" class="tab-content active">
+                    <!-- Checkboxes -->
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="ativarAuxilio">
+                            <span>Ativar Auxílio</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="ativarFov">
+                            <span>Ativar Fov</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="ativarAntiRecuo">
+                            <span>🌟 Anti-Recuo (VIP)</span>
+                        </label>
+                    </div>
+
+                    <!-- Slider FOV -->
+                    <div class="slider-container">
+                        <label class="slider-label">
+                            <span>Fov</span>
+                            <span id="fovValue" class="slider-value">5</span>
+                        </label>
+                        <input type="range" id="fovSlider" min="1" max="10" value="5" class="range-slider">
+                    </div>
+
+                    <!-- Slider Sensibilidade VIP -->
+                    <div class="slider-container">
+                        <label class="slider-label">
+                            <span>🌟 Sensibilidade (VIP)</span>
+                            <span id="sensValue" class="slider-value">50</span>
+                        </label>
+                        <input type="range" id="sensSlider" min="1" max="100" value="50" class="range-slider">
+                    </div>
+
+                    <!-- Dropdown -->
+                    <div class="dropdown-container">
+                        <label class="dropdown-label">Auxílio</label>
+                        <select id="auxilioSelect" class="custom-select">
+                            <option value="head">Auxílio Head</option>
+                            <option value="body">Auxílio Body</option>
+                            <option value="legs">Auxílio Legs</option>
+                            <option value="chest">🌟 Auxílio Chest (VIP)</option>
+                        </select>
+                    </div>
+
+                    <!-- Tipo de Aimbot -->
+                    <div class="radio-container">
+                        <label class="radio-title">Tipo de Aimbot:</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="tipoAimbot" value="atirar" checked>
+                                <span>Ao Atirar</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="tipoAimbot" value="olhar">
+                                <span>Ao Olhar</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="tipoAimbot" value="auto">
+                                <span>🌟 Auto (VIP)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Botão Injetar -->
+                    <button id="injetarBtn" class="btn-injetar">💎 INJETAR FUNÇÕES VIP</button>
+                    
+                    <!-- Termos -->
+                    <div class="termos">
+                        <a href="#" id="termosDashboard">
+                            ⚠️ Versão VIP Premium. Não nos responsabilizamos por mal uso.
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Conteúdo Config -->
+                <div id="config-tab" class="tab-content">
+                    <div class="config-content">
+                        <h2>⚙️ Configurações VIP</h2>
+                        
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="modoSilencioso">
+                                <span>🌟 Modo Silencioso</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="autoUpdate">
+                                <span>🌟 Auto-Update</span>
+                            </label>
+                        </div>
+                        
+                        <button class="btn-secondary">💾 Salvar Perfil</button>
+                        <button class="btn-secondary">📥 Carregar Perfil</button>
+                    </div>
+                </div>
+
+                <!-- Conteúdo Info -->
+                <div id="info-tab" class="tab-content">
+                    <div class="info-content">
+                        <h2>👑 Informações VIP</h2>
+                        <p style="color: #FFD700; margin: 15px 0;">
+                            Usuário: <span style="color: #FFA500; font-weight: bold;" id="usuarioLogado"></span>
+                        </p>
+                        <p style="color: #FFD700; margin: 10px 0;">
+                            Versão: <span style="color: #FFA500;">VIP v1.0</span>
+                        </p>
+                        <p style="color: #FFD700; margin: 10px 0;">
+                            Status: <span style="color: #00ff00; font-weight: bold;">PREMIUM ATIVO</span>
+                        </p>
+                        <p style="color: #FFD700; margin: 10px 0;">
+                            Recursos Exclusivos: <span style="color: #FFA500;">6</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>

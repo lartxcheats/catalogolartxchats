@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -894,7 +894,7 @@
             <div id="discordSection" style="display: none; background: rgba(0, 255, 136, 0.2); border: 2px solid #00ff88; border-radius: 15px; padding: 20px; margin-top: 20px; text-align: center;">
                 <h3 style="color: #00ff88; font-size: 20px; margin-bottom: 15px;">✅ Comprovante Enviado!</h3>
                 <p style="color: #fff; margin-bottom: 15px;">Seu comprovante foi recebido. Clique no botão abaixo para receber seu produto no Discord.</p>
-                <a href="https://discord.gg/J6YbmjEV" target="_blank" style="display: inline-block; background: linear-gradient(45deg, #00ff88, #00cc66); color: #000; padding: 15px 30px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 18px; margin-top: 10px;">
+                <a href="https://discord.gg/RvmsaWuuET" target="_blank" style="display: inline-block; background: linear-gradient(45deg, #00ff88, #00cc66); color: #000; padding: 15px 30px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 18px; margin-top: 10px;">
                     💬 Receber no Discord
                 </a>
                 <p style="color: #00d9ff; margin-top: 15px; font-size: 14px;">📧 Um email foi enviado para <span id="emailCliente"></span> com as instruções!</p>
@@ -904,7 +904,7 @@
         </div>
     </div>
     
-    <a href="https://discord.gg/J6YbmjEV" target="_blank" class="discord-float">
+    <a href="https://discord.gg/RvmsaWuuET" target="_blank" class="discord-float">
         <img src="discord.jfif" alt="Discord">
     </a>
     
@@ -1163,13 +1163,15 @@
                 
                 // Verificar valor do pagamento
                 const valorEsperado = precoEscolhido; // Valor que o cliente escolheu
+                const valorStr = valorEsperado.toFixed(2);
+                const valorVirgula = valorStr.replace('.', ',');
                 const valoresAceitos = [
-                    `${valorEsperado},00`,
-                    `${valorEsperado}.00`,
-                    `r$ ${valorEsperado}`,
-                    `r$${valorEsperado}`,
-                    `${valorEsperado}reais`,
-                    `${valorEsperado} reais`
+                    valorVirgula,
+                    valorStr,
+                    'r$ ' + valorVirgula,
+                    'r$ ' + valorStr,
+                    'r$' + valorVirgula,
+                    'r$' + valorStr
                 ];
                 
                 const textoLower = text.toLowerCase();
@@ -1202,9 +1204,8 @@
                     }
                 });
                 
-                // Verificação adicional: procurar padrão de número com vírgula ou ponto
-                const regexValor = new RegExp(`\\b${valorEsperado}[,.]\\d{2}\\b`, 'i');
-                if (regexValor.test(text)) {
+                // Verificação adicional por texto direto
+                if (textoLower.includes(valorVirgula) || textoLower.includes(valorStr)) {
                     valorEncontrado = true;
                 }
                 
@@ -1315,7 +1316,315 @@
             console.log('Recebemos seu comprovante de pagamento!');
             console.log('');
             console.log('Para receber seu produto, acesse nosso Discord:');
-            console.log('https://discord.gg/J6YbmjEV');
+            console.log('https://discord.gg/RvmsaWuuET');
+            console.log('');
+            console.log('Obrigado pela compra!');
+            console.log('Equipe Lartxcheats');
+            console.log('---');
+        }
+    </script>
+</body>
+</html>
+ + valorVirgula,
+                    'r
+                
+                const textoLower = text.toLowerCase();
+                let palavrasEncontradas = 0;
+                let palavrasDetectadas = [];
+                let nomeEncontrado = false;
+                let partesNomeEncontradas = [];
+                let valorEncontrado = false;
+                
+                // Verificar palavras-chave
+                palavrasChave.forEach(palavra => {
+                    if (textoLower.includes(palavra)) {
+                        palavrasEncontradas++;
+                        palavrasDetectadas.push(palavra);
+                    }
+                });
+                
+                // Verificar nome do destinatário
+                nomeDestinatario.forEach(parte => {
+                    if (textoLower.includes(parte)) {
+                        nomeEncontrado = true;
+                        partesNomeEncontradas.push(parte);
+                    }
+                });
+                
+                // Verificar valor
+                valoresAceitos.forEach(valor => {
+                    if (textoLower.includes(valor)) {
+                        valorEncontrado = true;
+                    }
+                });
+                
+                // Verificação adicional por texto direto
+                if (textoLower.includes(valorVirgula) || textoLower.includes(valorStr)) {
+                    valorEncontrado = true;
+                }
+                
+                console.log('✅ Palavras-chave encontradas:', palavrasEncontradas);
+                console.log('📋 Palavras detectadas:', palavrasDetectadas);
+                console.log('👤 Nome encontrado:', nomeEncontrado);
+                console.log('📝 Partes do nome:', partesNomeEncontradas);
+                console.log('💰 Valor esperado:', valorEsperado);
+                console.log('💰 Valor encontrado:', valorEncontrado);
+                
+                // Validação completa: palavras-chave + nome + valor
+                if (palavrasEncontradas >= 3 && nomeEncontrado && valorEncontrado) {
+                    comprovanteValido = true;
+                    statusDiv.style.background = 'rgba(0, 255, 136, 0.2)';
+                    statusDiv.style.border = '1px solid #00ff88';
+                    statusDiv.style.color = '#00ff88';
+                    const valorFormatado = valorEsperado.toFixed(2).replace('.', ',');
+                    statusDiv.innerHTML = `✅ Comprovante válido!<br>✓ Destinatário: Gustavo Almeida Goulart<br>✓ Valor: R$ ${valorFormatado}<br>✓ Detectadas: ${palavrasDetectadas.slice(0, 4).join(', ')}`;
+                    
+                    document.getElementById('btnEnviarComprovante').disabled = false;
+                    document.getElementById('btnEnviarComprovante').style.opacity = '1';
+                } else if (palavrasEncontradas >= 3 && nomeEncontrado && !valorEncontrado) {
+                    comprovanteValido = false;
+                    statusDiv.style.background = 'rgba(255, 51, 51, 0.2)';
+                    statusDiv.style.border = '1px solid #ff3333';
+                    statusDiv.style.color = '#ff3333';
+                    const valorFormatado = valorEsperado.toFixed(2).replace('.', ',');
+                    statusDiv.innerHTML = `❌ Valor incorreto no comprovante!<br>Esperado: R$ ${valorFormatado}<br>Verifique se pagou o valor exato.`;
+                    
+                    document.getElementById('btnEnviarComprovante').disabled = true;
+                    document.getElementById('btnEnviarComprovante').style.opacity = '0.5';
+                } else if (palavrasEncontradas >= 3 && !nomeEncontrado) {
+                    comprovanteValido = false;
+                    statusDiv.style.background = 'rgba(255, 51, 51, 0.2)';
+                    statusDiv.style.border = '1px solid #ff3333';
+                    statusDiv.style.color = '#ff3333';
+                    statusDiv.innerHTML = `❌ Comprovante não é para o destinatário correto!<br>Esperado: Gustavo Almeida Goulart<br>Verifique se o pagamento foi feito para a chave PIX correta.`;
+                    
+                    document.getElementById('btnEnviarComprovante').disabled = true;
+                    document.getElementById('btnEnviarComprovante').style.opacity = '0.5';
+                } else {
+                    comprovanteValido = false;
+                    statusDiv.style.background = 'rgba(255, 51, 51, 0.2)';
+                    statusDiv.style.border = '1px solid #ff3333';
+                    statusDiv.style.color = '#ff3333';
+                    statusDiv.innerHTML = `❌ Imagem não parece ser um comprovante válido.<br>Detectadas apenas ${palavrasEncontradas} palavras-chave.<br>Tente outra imagem mais clara ou tire um print melhor.`;
+                    
+                    document.getElementById('btnEnviarComprovante').disabled = true;
+                    document.getElementById('btnEnviarComprovante').style.opacity = '0.5';
+                }
+            }).catch(err => {
+                console.error('Erro no OCR:', err);
+                // Se OCR falhar, permitir envio mesmo assim (pode ser problema de conexão)
+                comprovanteValido = true;
+                statusDiv.style.background = 'rgba(255, 200, 0, 0.2)';
+                statusDiv.style.border = '1px solid #ffc800';
+                statusDiv.style.color = '#ffc800';
+                statusDiv.innerHTML = '⚠️ Não foi possível validar automaticamente. Você pode enviar, mas certifique-se de que é um comprovante válido.';
+                
+                document.getElementById('btnEnviarComprovante').disabled = false;
+                document.getElementById('btnEnviarComprovante').style.opacity = '1';
+            });
+        }
+        
+        function enviarComprovante() {
+            if (!comprovanteFile) {
+                alert('Por favor, selecione um comprovante primeiro.');
+                return;
+            }
+            
+            const statusDiv = document.getElementById('statusEnvio');
+            statusDiv.style.display = 'block';
+            statusDiv.style.background = 'rgba(0, 217, 255, 0.2)';
+            statusDiv.style.border = '1px solid #00d9ff';
+            statusDiv.style.color = '#00d9ff';
+            statusDiv.innerHTML = '⏳ Enviando comprovante...';
+            
+            // Simular envio (em produção, aqui você faria o upload real)
+            setTimeout(() => {
+                statusDiv.style.background = 'rgba(0, 255, 136, 0.2)';
+                statusDiv.style.border = '1px solid #00ff88';
+                statusDiv.style.color = '#00ff88';
+                statusDiv.innerHTML = '✅ Comprovante enviado com sucesso!';
+                
+                // Esconder seção de upload
+                document.getElementById('comprovanteSection').style.display = 'none';
+                
+                // Mostrar seção do Discord
+                document.getElementById('discordSection').style.display = 'block';
+                document.getElementById('emailCliente').textContent = emailClienteGlobal;
+                
+                // Simular envio de email
+                enviarEmailConfirmacao();
+                
+            }, 2000);
+        }
+        
+        function enviarEmailConfirmacao() {
+            // Em produção, aqui você chamaria uma API para enviar o email
+            console.log('📧 Email enviado para:', emailClienteGlobal);
+            console.log('Conteúdo do email:');
+            console.log('---');
+            console.log('Assunto: Comprovante Recebido - Lartxcheats');
+            console.log('Para:', emailClienteGlobal);
+            console.log('Mensagem:');
+            console.log('Olá!');
+            console.log('');
+            console.log('Recebemos seu comprovante de pagamento!');
+            console.log('');
+            console.log('Para receber seu produto, acesse nosso Discord:');
+            console.log('https://discord.gg/RvmsaWuuET');
+            console.log('');
+            console.log('Obrigado pela compra!');
+            console.log('Equipe Lartxcheats');
+            console.log('---');
+        }
+    </script>
+</body>
+</html>
+ + valorStr
+                ];
+                
+                const textoLower = text.toLowerCase();
+                let palavrasEncontradas = 0;
+                let palavrasDetectadas = [];
+                let nomeEncontrado = false;
+                let partesNomeEncontradas = [];
+                let valorEncontrado = false;
+                
+                // Verificar palavras-chave
+                palavrasChave.forEach(palavra => {
+                    if (textoLower.includes(palavra)) {
+                        palavrasEncontradas++;
+                        palavrasDetectadas.push(palavra);
+                    }
+                });
+                
+                // Verificar nome do destinatário
+                nomeDestinatario.forEach(parte => {
+                    if (textoLower.includes(parte)) {
+                        nomeEncontrado = true;
+                        partesNomeEncontradas.push(parte);
+                    }
+                });
+                
+                // Verificar valor
+                valoresAceitos.forEach(valor => {
+                    if (textoLower.includes(valor)) {
+                        valorEncontrado = true;
+                    }
+                });
+                
+                // Verificação adicional por texto direto
+                if (textoLower.includes(valorVirgula) || textoLower.includes(valorStr)) {
+                    valorEncontrado = true;
+                }
+                
+                console.log('✅ Palavras-chave encontradas:', palavrasEncontradas);
+                console.log('📋 Palavras detectadas:', palavrasDetectadas);
+                console.log('👤 Nome encontrado:', nomeEncontrado);
+                console.log('📝 Partes do nome:', partesNomeEncontradas);
+                console.log('💰 Valor esperado:', valorEsperado);
+                console.log('💰 Valor encontrado:', valorEncontrado);
+                
+                // Validação completa: palavras-chave + nome + valor
+                if (palavrasEncontradas >= 3 && nomeEncontrado && valorEncontrado) {
+                    comprovanteValido = true;
+                    statusDiv.style.background = 'rgba(0, 255, 136, 0.2)';
+                    statusDiv.style.border = '1px solid #00ff88';
+                    statusDiv.style.color = '#00ff88';
+                    const valorFormatado = valorEsperado.toFixed(2).replace('.', ',');
+                    statusDiv.innerHTML = `✅ Comprovante válido!<br>✓ Destinatário: Gustavo Almeida Goulart<br>✓ Valor: R$ ${valorFormatado}<br>✓ Detectadas: ${palavrasDetectadas.slice(0, 4).join(', ')}`;
+                    
+                    document.getElementById('btnEnviarComprovante').disabled = false;
+                    document.getElementById('btnEnviarComprovante').style.opacity = '1';
+                } else if (palavrasEncontradas >= 3 && nomeEncontrado && !valorEncontrado) {
+                    comprovanteValido = false;
+                    statusDiv.style.background = 'rgba(255, 51, 51, 0.2)';
+                    statusDiv.style.border = '1px solid #ff3333';
+                    statusDiv.style.color = '#ff3333';
+                    const valorFormatado = valorEsperado.toFixed(2).replace('.', ',');
+                    statusDiv.innerHTML = `❌ Valor incorreto no comprovante!<br>Esperado: R$ ${valorFormatado}<br>Verifique se pagou o valor exato.`;
+                    
+                    document.getElementById('btnEnviarComprovante').disabled = true;
+                    document.getElementById('btnEnviarComprovante').style.opacity = '0.5';
+                } else if (palavrasEncontradas >= 3 && !nomeEncontrado) {
+                    comprovanteValido = false;
+                    statusDiv.style.background = 'rgba(255, 51, 51, 0.2)';
+                    statusDiv.style.border = '1px solid #ff3333';
+                    statusDiv.style.color = '#ff3333';
+                    statusDiv.innerHTML = `❌ Comprovante não é para o destinatário correto!<br>Esperado: Gustavo Almeida Goulart<br>Verifique se o pagamento foi feito para a chave PIX correta.`;
+                    
+                    document.getElementById('btnEnviarComprovante').disabled = true;
+                    document.getElementById('btnEnviarComprovante').style.opacity = '0.5';
+                } else {
+                    comprovanteValido = false;
+                    statusDiv.style.background = 'rgba(255, 51, 51, 0.2)';
+                    statusDiv.style.border = '1px solid #ff3333';
+                    statusDiv.style.color = '#ff3333';
+                    statusDiv.innerHTML = `❌ Imagem não parece ser um comprovante válido.<br>Detectadas apenas ${palavrasEncontradas} palavras-chave.<br>Tente outra imagem mais clara ou tire um print melhor.`;
+                    
+                    document.getElementById('btnEnviarComprovante').disabled = true;
+                    document.getElementById('btnEnviarComprovante').style.opacity = '0.5';
+                }
+            }).catch(err => {
+                console.error('Erro no OCR:', err);
+                // Se OCR falhar, permitir envio mesmo assim (pode ser problema de conexão)
+                comprovanteValido = true;
+                statusDiv.style.background = 'rgba(255, 200, 0, 0.2)';
+                statusDiv.style.border = '1px solid #ffc800';
+                statusDiv.style.color = '#ffc800';
+                statusDiv.innerHTML = '⚠️ Não foi possível validar automaticamente. Você pode enviar, mas certifique-se de que é um comprovante válido.';
+                
+                document.getElementById('btnEnviarComprovante').disabled = false;
+                document.getElementById('btnEnviarComprovante').style.opacity = '1';
+            });
+        }
+        
+        function enviarComprovante() {
+            if (!comprovanteFile) {
+                alert('Por favor, selecione um comprovante primeiro.');
+                return;
+            }
+            
+            const statusDiv = document.getElementById('statusEnvio');
+            statusDiv.style.display = 'block';
+            statusDiv.style.background = 'rgba(0, 217, 255, 0.2)';
+            statusDiv.style.border = '1px solid #00d9ff';
+            statusDiv.style.color = '#00d9ff';
+            statusDiv.innerHTML = '⏳ Enviando comprovante...';
+            
+            // Simular envio (em produção, aqui você faria o upload real)
+            setTimeout(() => {
+                statusDiv.style.background = 'rgba(0, 255, 136, 0.2)';
+                statusDiv.style.border = '1px solid #00ff88';
+                statusDiv.style.color = '#00ff88';
+                statusDiv.innerHTML = '✅ Comprovante enviado com sucesso!';
+                
+                // Esconder seção de upload
+                document.getElementById('comprovanteSection').style.display = 'none';
+                
+                // Mostrar seção do Discord
+                document.getElementById('discordSection').style.display = 'block';
+                document.getElementById('emailCliente').textContent = emailClienteGlobal;
+                
+                // Simular envio de email
+                enviarEmailConfirmacao();
+                
+            }, 2000);
+        }
+        
+        function enviarEmailConfirmacao() {
+            // Em produção, aqui você chamaria uma API para enviar o email
+            console.log('📧 Email enviado para:', emailClienteGlobal);
+            console.log('Conteúdo do email:');
+            console.log('---');
+            console.log('Assunto: Comprovante Recebido - Lartxcheats');
+            console.log('Para:', emailClienteGlobal);
+            console.log('Mensagem:');
+            console.log('Olá!');
+            console.log('');
+            console.log('Recebemos seu comprovante de pagamento!');
+            console.log('');
+            console.log('Para receber seu produto, acesse nosso Discord:');
+            console.log('https://discord.gg/RvmsaWuuET');
             console.log('');
             console.log('Obrigado pela compra!');
             console.log('Equipe Lartxcheats');

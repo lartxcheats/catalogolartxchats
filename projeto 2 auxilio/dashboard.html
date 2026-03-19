@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0066cc">
+    <meta name="description" content="Dashboard LartxCheats">
+    <title>Dashboard - LartxCheats</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css">
+    <link rel="apple-touch-icon" href="gu.jpeg">
+</head>
+<body>
+    <div id="particles-js"></div>
+    
+    <!-- Círculo FOV Overlay -->
+    <div id="fovOverlay" class="fov-overlay">
+        <div id="fovCircle" class="fov-circle"></div>
+    </div>
+    
+    <div class="container">
+        <header>
+            <img src="gu.jpeg" alt="Avatar" class="avatar">
+            <h1 class="titulo-gamer">AUXILIO LartxCheats</h1>
+            <button id="logoutBtn" class="install-btn">Sair</button>
+        </header>
+
+        <main>
+            <div class="card">
+                <!-- Abas -->
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="switchTab('aimbot')">Aimbot</button>
+                    <button class="tab-btn" onclick="switchTab('info')">Info</button>
+                </div>
+
+                <!-- Conteúdo Aimbot -->
+                <div id="aimbot-tab" class="tab-content active">
+                    <!-- Checkboxes -->
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="ativarAuxilio">
+                            <span>Ativar Auxílio</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="ativarFov">
+                            <span>Ativar Fov</span>
+                        </label>
+                    </div>
+
+                    <!-- Slider FOV -->
+                    <div class="slider-container">
+                        <label class="slider-label">
+                            <span>Fov</span>
+                            <span id="fovValue" class="slider-value">5</span>
+                        </label>
+                        <input type="range" id="fovSlider" min="1" max="10" value="5" class="range-slider">
+                    </div>
+
+                    <!-- Dropdown -->
+                    <div class="dropdown-container">
+                        <label class="dropdown-label">Auxílio Head</label>
+                        <select id="auxilioSelect" class="custom-select">
+                            <option value="head">Auxílio Head</option>
+                            <option value="body">Auxílio Body</option>
+                            <option value="legs">Auxílio Legs</option>
+                        </select>
+                    </div>
+
+                    <!-- Tipo de Aimbot -->
+                    <div class="radio-container">
+                        <label class="radio-title">Tipo de Aimbot:</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="tipoAimbot" value="atirar" checked>
+                                <span>Ao Atirar</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="tipoAimbot" value="olhar">
+                                <span>Ao Olhar</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Botão Injetar -->
+                    <button id="injetarBtn" class="btn-injetar">INJETAR FUNÇÕES NO JOGO</button>
+                    
+                    <!-- Termos -->
+                    <div class="termos">
+                        <a href="#" id="termosDashboard">
+                            ⚠️ Produto gratuito. Não nos responsabilizamos por mal uso.
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Conteúdo Info -->
+                <div id="info-tab" class="tab-content">
+                    <div class="info-content">
+                        <h2>Informações do Sistema</h2>
+                        <p style="color: #4d94ff; margin: 15px 0;">
+                            Usuário: <span style="color: #00d9ff; font-weight: bold;" id="usuarioLogado"></span>
+                        </p>
+                        <p style="color: #4d94ff; margin: 10px 0;">
+                            Versão: <span style="color: #00d9ff;">v1.0</span>
+                        </p>
+                        <p style="color: #4d94ff; margin: 10px 0;">
+                            Status: <span style="color: #00ff00; font-weight: bold;">ATIVO</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>

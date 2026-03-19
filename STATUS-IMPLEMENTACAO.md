@@ -61,7 +61,7 @@
 ### 8. Fluxo Pós-Validação
 - ✅ Botão "Enviar Comprovante" só ativa após validação
 - ✅ Seção do Discord aparece após envio
-- ✅ Link para Discord: discord.gg/J6YbmjEV
+- ✅ Link para Discord: discord.gg/RvmsaWuuET
 - ✅ Exibição do email do cliente
 - ✅ Simulação de envio de email
 

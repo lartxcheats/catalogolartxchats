@@ -50,7 +50,7 @@ Todos os 4 arquivos de produtos estão com o sistema de validação de comprovan
 ### 5. Fluxo Após Validação
 - ✅ Botão "Enviar Comprovante" só fica ativo após validação bem-sucedida
 - ✅ Após envio, mostra seção do Discord
-- ✅ Botão para acessar Discord: discord.gg/J6YbmjEV
+- ✅ Botão para acessar Discord: discord.gg/RvmsaWuuET
 - ✅ Simulação de envio de email de confirmação
 - ✅ Email do cliente é exibido na mensagem de sucesso
 
@@ -132,4 +132,4 @@ O sistema está **100% funcional** e pronto para uso! Todos os 4 produtos têm v
 
 **Chave PIX**: `23652c43-84f7-45a6-9c59-dc11b8f80ed3`
 **Destinatário**: Gustavo Almeida Goulart
-**Discord**: discord.gg/J6YbmjEV
+**Discord**: discord.gg/RvmsaWuuET

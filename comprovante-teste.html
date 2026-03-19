@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Comprovante de Teste</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0a1a;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 15px;
+            min-height: 100vh;
+        }
+        h1 { color: #00ff88; margin-bottom: 5px; font-size: 22px; }
+        p.sub { color: #aaa; font-size: 13px; margin-bottom: 25px; }
+
+        .controls {
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 20px;
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 25px;
+        }
+        label { display: block; color: #aaa; font-size: 13px; margin-bottom: 5px; margin-top: 12px; }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            background: #1a1a2e;
+            border: 1px solid #333;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 14px;
+        }
+        button {
+            width: 100%;
+            margin-top: 18px;
+            padding: 13px;
+            background: linear-gradient(45deg, #00ff88, #00cc66);
+            color: #000;
+            font-weight: bold;
+            font-size: 15px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        button:hover { opacity: 0.9; }
+
+        /* Comprovante visual */
+        #comprovante {
+            background: #fff;
+            color: #000;
+            width: 360px;
+            border-radius: 16px;
+            padding: 28px 24px;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            box-shadow: 0 0 30px rgba(0,255,136,0.2);
+        }
+        .comp-header {
+            text-align: center;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 16px;
+            margin-bottom: 16px;
+        }
+        .comp-banco { font-size: 20px; font-weight: bold; color: #6200ea; }
+        .comp-titulo { font-size: 13px; color: #555; margin-top: 4px; }
+        .comp-status {
+            background: #e8f5e9;
+            color: #2e7d32;
+            font-weight: bold;
+            font-size: 14px;
+            text-align: center;
+            padding: 8px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+        .comp-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            padding: 6px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .comp-row .label { color: #777; }
+        .comp-row .value { font-weight: bold; color: #111; text-align: right; max-width: 200px; }
+        .comp-valor {
+            text-align: center;
+            margin: 18px 0;
+            font-size: 28px;
+            font-weight: bold;
+            color: #2e7d32;
+        }
+        .comp-footer {
+            text-align: center;
+            font-size: 11px;
+            color: #aaa;
+            margin-top: 16px;
+            border-top: 1px solid #eee;
+            padding-top: 12px;
+        }
+
+        #btnDownload {
+            background: linear-gradient(45deg, #0066cc, #0044aa);
+            color: #fff;
+            margin-top: 15px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<h1>🧪 Gerador de Comprovante de Teste</h1>
+<p class="sub">Apenas para testes internos do sistema</p>
+
+<div class="controls">
+    <label>Valor (R$)</label>
+    <input type="number" id="valor" value="16.00" step="0.01" min="0.01">
+
+    <label>Banco</label>
+    <select id="banco">
+        <option value="Nubank">Nubank</option>
+        <option value="Itaú">Itaú</option>
+        <option value="Bradesco">Bradesco</option>
+        <option value="Banco Inter">Banco Inter</option>
+        <option value="PicPay">PicPay</option>
+        <option value="Mercado Pago">Mercado Pago</option>
+        <option value="C6 Bank">C6 Bank</option>
+    </select>
+
+    <label>Nome do Pagador</label>
+    <input type="text" id="pagador" value="João Silva">
+
+    <button onclick="gerarComprovante()">⚡ Gerar Comprovante</button>
+    <button id="btnDownload" onclick="baixarImagem()">📥 Baixar como Imagem</button>
+</div>
+
+<!-- Comprovante renderizado -->
+<div id="comprovante" style="display:none;">
+    <div class="comp-header">
+        <div class="comp-banco" id="c-banco">Nubank</div>
+        <div class="comp-titulo">Comprovante de Pagamento PIX</div>
+    </div>
+    <div class="comp-status">✔ Transferência realizada com sucesso</div>
+    <div class="comp-valor" id="c-valor">R$ 16,00</div>
+
+    <div class="comp-row">
+        <span class="label">Tipo</span>
+        <span class="value">PIX</span>
+    </div>
+    <div class="comp-row">
+        <span class="label">Data</span>
+        <span class="value" id="c-data"></span>
+    </div>
+    <div class="comp-row">
+        <span class="label">Pagador</span>
+        <span class="value" id="c-pagador">João Silva</span>
+    </div>
+    <div class="comp-row">
+        <span class="label">Destinatário</span>
+        <span class="value">Gustavo Almeida Goulart</span>
+    </div>
+    <div class="comp-row">
+        <span class="label">Chave PIX</span>
+        <span class="value">23652c43-84f7-45a6-9c59-dc11b8f80ed3</span>
+    </div>
+    <div class="comp-row">
+        <span class="label">Banco Dest.</span>
+        <span class="value">Banco do Brasil</span>
+    </div>
+    <div class="comp-row">
+        <span class="label">ID Transação</span>
+        <span class="value" id="c-id"></span>
+    </div>
+    <div class="comp-footer">
+        Pagamento processado via PIX — Banco Central do Brasil<br>
+        Este comprovante é válido como recibo de pagamento
+    </div>
+</div>
+
+<script>
+    function gerarComprovante() {
+        const valor = parseFloat(document.getElementById('valor').value) || 16;
+        const banco = document.getElementById('banco').value;
+        const pagador = document.getElementById('pagador').value || 'João Silva';
+
+        const agora = new Date();
+        const data = agora.toLocaleDateString('pt-BR') + ' ' + agora.toLocaleTimeString('pt-BR');
+        const id = 'E' + Math.random().toString(36).substring(2, 12).toUpperCase();
+
+        document.getElementById('c-banco').textContent = banco;
+        document.getElementById('c-valor').textContent = 'R$ ' + valor.toFixed(2).replace('.', ',');
+        document.getElementById('c-data').textContent = data;
+        document.getElementById('c-pagador').textContent = pagador;
+        document.getElementById('c-id').textContent = id;
+
+        const comp = document.getElementById('comprovante');
+        comp.style.display = 'block';
+        document.getElementById('btnDownload').style.display = 'block';
+
+        comp.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function baixarImagem() {
+        const comp = document.getElementById('comprovante');
+        html2canvas(comp, { scale: 2, backgroundColor: '#ffffff' }).then(canvas => {
+            const link = document.createElement('a');
+            link.download = 'comprovante-teste.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        });
+    }
+</script>
+
+</body>
+</html>
